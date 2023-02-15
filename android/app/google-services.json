@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "999034884404",
+    "project_id": "delonixapp",
+    "storage_bucket": "delonixapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999034884404:android:1f8208920fb0dd4a459561",
+        "android_client_info": {
+          "package_name": "com.example.petshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "999034884404-octkg05gcei8qklghgd8s74g91dbsfjq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.petshop",
+            "certificate_hash": "316f8ac9a72410bc29b5b66dcb5f2ac387824279"
+          }
+        },
+        {
+          "client_id": "999034884404-la9gg5btdhmfshcqbljac9gj7krgbaav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe1qDNUvFSax4mP-cbq3C6WJtn7CVaXYA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "999034884404-la9gg5btdhmfshcqbljac9gj7krgbaav.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
