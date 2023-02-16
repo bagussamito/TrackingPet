@@ -3,6 +3,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
@@ -145,89 +146,6 @@ class RegisterView extends GetView<RegisterController> {
                         SizedBox(
                           height: bodyHeight * 0.005,
                         ),
-                        //dropdown
-                        Container(
-                          width: bodyWidth * 1,
-                          height: bodyHeight * 0.062,
-                          decoration: BoxDecoration(
-                              color: light,
-                              borderRadius: BorderRadius.circular(12)),
-                          child: DropdownSearch<String>(
-                            autoValidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            clearButtonProps:
-                                ClearButtonProps(isVisible: true, color: dark),
-                            items: [
-                              "User",
-                              "Admin",
-                              "Dokter",
-                            ],
-                            onChanged: (value) {
-                              if (value != null) {
-                                controller.setRole(value);
-                              }
-                            },
-                            validator: (value) {
-                              controller.roleValidator;
-                            },
-                            dropdownDecoratorProps: DropDownDecoratorProps(
-                                dropdownSearchDecoration: InputDecoration(
-                                    prefixIcon: Align(
-                                        widthFactor: 1.0,
-                                        heightFactor: 1.0,
-                                        child: Icon(
-                                          IconlyLight.user_1,
-                                          color: Red1,
-                                        )),
-                                    hintText: "Role",
-                                    hintStyle: heading6.copyWith(
-                                        color: Grey1, fontSize: 14 * textScale),
-                                    border: OutlineInputBorder(
-                                        borderSide: BorderSide.none))),
-                            popupProps: PopupProps.menu(
-                              constraints:
-                                  BoxConstraints(maxHeight: bodyHeight * 0.2),
-                              scrollbarProps: ScrollbarProps(
-                                  trackVisibility: true, trackColor: dark),
-                              fit: FlexFit.loose,
-                              menuProps: MenuProps(
-                                borderRadius: BorderRadius.circular(12),
-                                backgroundColor: Colors.transparent,
-                                elevation: 0,
-                              ),
-                              containerBuilder: (ctx, popupWidget) {
-                                return Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 20),
-                                    ),
-                                    Flexible(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                            color: light,
-                                            boxShadow: [
-                                              BoxShadow(
-                                                  offset: Offset(0, 0.5),
-                                                  blurRadius: 1,
-                                                  color: dark.withOpacity(0.5))
-                                            ],
-                                            borderRadius:
-                                                BorderRadius.circular(12)),
-                                        child: popupWidget,
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              },
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: bodyHeight * 0.028,
-                        ),
                         Form(
                           key: controller.emailKey.value,
                           child: Container(
@@ -290,7 +208,6 @@ class RegisterView extends GetView<RegisterController> {
                             ),
                           ),
                         ),
-
                         SizedBox(
                           height: bodyHeight * 0.005,
                         ),
@@ -333,8 +250,88 @@ class RegisterView extends GetView<RegisterController> {
                                       splashRadius: 1,
                                       icon: Icon(
                                           controller.isPasswordHidden.value
-                                              ? Icons.visibility_rounded
-                                              : Icons.visibility_off),
+                                              ? FontAwesomeIcons.eye
+                                              : FontAwesomeIcons.eyeSlash),
+                                      onPressed: () {
+                                        controller.isPasswordHidden.value =
+                                            !controller.isPasswordHidden.value;
+                                      },
+                                    ),
+                                  ),
+                                  focusColor: Blue1,
+                                  fillColor: light,
+                                  filled: true,
+                                  errorStyle: TextStyle(
+                                    fontSize: 13.5 * textScale,
+                                    color: light,
+                                    background: Paint()
+                                      ..strokeWidth = 13
+                                      ..color = errorBg
+                                      ..style = PaintingStyle.stroke
+                                      ..strokeJoin = StrokeJoin.round,
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: errorBg, width: 1.8),
+                                      borderRadius: BorderRadius.circular(12),
+                                      gapPadding: 2),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: error, width: 1.8),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Blue1, width: 1.8),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12))),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: bodyHeight * 0.005,
+                        ),
+                        Obx(
+                          () => Container(
+                            width: bodyWidth * 1,
+                            height: bodyHeight * 0.085,
+                            child: TextFormField(
+                              style: TextStyle(color: dark),
+                              onTap: () {
+                                FocusScopeNode currentFocus =
+                                    FocusScope.of(context);
+
+                                if (!currentFocus.hasPrimaryFocus) {
+                                  currentFocus.unfocus();
+                                }
+                              },
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              validator: controller.passValidator,
+                              obscureText: controller.isPasswordHidden.value,
+                              controller: controller.repeatpassC,
+                              decoration: InputDecoration(
+                                  prefixIcon: Align(
+                                      widthFactor: 1.0,
+                                      heightFactor: 1.0,
+                                      child: Icon(
+                                        IconlyLight.lock,
+                                        color: Red1,
+                                      )),
+                                  hintText: 'Ulangi Kata Sandi',
+                                  hintStyle: heading6.copyWith(
+                                      color: Grey1, fontSize: 14 * textScale),
+                                  suffixIcon: Padding(
+                                    padding: EdgeInsets.only(
+                                      right: bodyWidth * 0.02,
+                                    ),
+                                    child: IconButton(
+                                      color: Colors.black26,
+                                      splashRadius: 1,
+                                      icon: FaIcon(
+                                          controller.isPasswordHidden.value
+                                              ? FontAwesomeIcons.eye
+                                              : FontAwesomeIcons.eyeSlash),
                                       onPressed: () {
                                         controller.isPasswordHidden.value =
                                             !controller.isPasswordHidden.value;

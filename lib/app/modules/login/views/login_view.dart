@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 
 import 'package:get/get.dart';
@@ -221,10 +222,10 @@ class LoginView extends GetView<LoginController> {
                                       child: IconButton(
                                         color: Colors.black26,
                                         splashRadius: 1,
-                                        icon: Icon(
+                                        icon: FaIcon(
                                             controller.isPasswordHidden.value
-                                                ? Icons.visibility_rounded
-                                                : Icons.visibility_off_rounded),
+                                                ? FontAwesomeIcons.eye
+                                                : FontAwesomeIcons.eyeSlash),
                                         onPressed: () {
                                           controller.isPasswordHidden.value =
                                               !controller

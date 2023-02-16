@@ -9,12 +9,14 @@ class RegisterController extends GetxController {
 
   final emailC = TextEditingController();
   final passC = TextEditingController();
+  final repeatpassC = TextEditingController();
   final nameC = TextEditingController();
   final roleC = "".obs;
 
   final nameKey = GlobalKey<FormState>().obs;
   final emailKey = GlobalKey<FormState>().obs;
   final passKey = GlobalKey<FormState>().obs;
+  final repeatpassKey = GlobalKey<FormState>().obs;
 
   final nameValidator = MultiValidator([
     RequiredValidator(errorText: "Kolom harus diisi"),
