@@ -10,6 +10,7 @@ abstract class Routes {
   static const SETTING_ADMIN = _Paths.SETTING_ADMIN;
   static const DASHBOARD = _Paths.DASHBOARD;
   static const DASHBOARD_ADMIN = _Paths.DASHBOARD_ADMIN;
+  static const GROOMING_ADMIN = _Paths.GROOMING_ADMIN;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const SETTING_ADMIN = '/setting-admin';
   static const DASHBOARD = '/dashboard';
   static const DASHBOARD_ADMIN = '/dashboard-admin';
+  static const GROOMING_ADMIN = '/grooming-admin';
 }
