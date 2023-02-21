@@ -8,14 +8,11 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:petshop/app/utils/loading.dart';
 
-// import '../modules/attendance/controllers/attendance_controller.dart';
 import '../modules/home/views/home_view.dart';
 import '../routes/app_pages.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
-
-  // final attendanceC = Get.put(AttendanceController());
 
   Stream<User?> get streamAuthStatus => auth.userChanges();
 
@@ -33,8 +30,8 @@ class AuthController extends GetxController {
   }
 
   //store user data
-  void syncUsers(
-      String name, String email, String password, String role) async {
+  void syncUsers(String name, String email, String password, String alamat,
+      String role) async {
     String uid = auth.currentUser!.uid.toString();
 
     CollectionReference users = firestore.collection('Users');
@@ -42,10 +39,11 @@ class AuthController extends GetxController {
       users.doc(uid).set({
         'uid': uid,
         'name': name,
+        'password': password,
+        'alamat': alamat,
         'email': email,
         'profile': '',
-        'password': password,
-        'role': role,
+        'role': 'pelanggan',
       });
     } catch (e) {
       print(e);
@@ -70,7 +68,6 @@ class AuthController extends GetxController {
 
       if (myUser.user!.emailVerified) {
         Get.offAllNamed(Routes.HOME);
-        // attendanceC.getPositionOnly();
       } else {
         Get.defaultDialog(
             title: 'Verifikasi Email',
@@ -110,7 +107,8 @@ class AuthController extends GetxController {
   }
 
   //register
-  void register(String name, String email, String password, String role) async {
+  void register(String name, String email, String password, String role,
+      String alamat) async {
     try {
       UserCredential myUser =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -119,7 +117,7 @@ class AuthController extends GetxController {
       );
 
       await myUser.user?.updateDisplayName(name);
-      syncUsers(name, email, password, role);
+      syncUsers(name, email, password, role, alamat);
       await myUser.user!.sendEmailVerification();
       Get.defaultDialog(
           title: 'Verifikasi Email',

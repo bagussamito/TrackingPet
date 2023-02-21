@@ -8,13 +8,16 @@ class RegisterController extends GetxController {
   //TODO: Implement RegisterController
 
   final emailC = TextEditingController();
+  final alamatC = TextEditingController();
   final passC = TextEditingController();
+  final roleC = TextEditingController();
   final repeatpassC = TextEditingController();
   final nameC = TextEditingController();
-  final roleC = "".obs;
 
   final nameKey = GlobalKey<FormState>().obs;
   final emailKey = GlobalKey<FormState>().obs;
+  final alamatKey = GlobalKey<FormState>().obs;
+  final role = GlobalKey<FormState>().obs;
   final passKey = GlobalKey<FormState>().obs;
   final repeatpassKey = GlobalKey<FormState>().obs;
 
@@ -24,6 +27,10 @@ class RegisterController extends GetxController {
 
   final emailValidator = MultiValidator([
     EmailValidator(errorText: "Email tidak valid"),
+    RequiredValidator(errorText: "Kolom harus diisi"),
+  ]);
+
+  final alamatValidator = MultiValidator([
     RequiredValidator(errorText: "Kolom harus diisi"),
   ]);
 
@@ -37,11 +44,6 @@ class RegisterController extends GetxController {
   ]);
 
   var isPasswordHidden = true.obs;
-
-  void setRole(String role) {
-    roleC.value = role;
-    log(roleC.value);
-  }
 
   @override
   void onInit() {

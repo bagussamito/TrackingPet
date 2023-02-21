@@ -211,6 +211,70 @@ class RegisterView extends GetView<RegisterController> {
                         SizedBox(
                           height: bodyHeight * 0.005,
                         ),
+                        Form(
+                          key: controller.alamatKey.value,
+                          child: Container(
+                            width: bodyWidth * 1,
+                            height: bodyHeight * 0.085,
+                            child: TextFormField(
+                              textInputAction: TextInputAction.next,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              controller: controller.alamatC,
+                              onTap: () {
+                                FocusScopeNode currentFocus =
+                                    FocusScope.of(context);
+
+                                if (!currentFocus.hasPrimaryFocus) {
+                                  currentFocus.unfocus();
+                                }
+                              },
+                              validator: controller.alamatValidator,
+                              style: TextStyle(color: dark),
+                              decoration: InputDecoration(
+                                  prefixIcon: Align(
+                                      widthFactor: 1.0,
+                                      heightFactor: 1.0,
+                                      child: FaIcon(
+                                        FontAwesomeIcons.addressBook,
+                                        color: Red1,
+                                      )),
+                                  hintText: 'Alamat',
+                                  hintStyle: heading6.copyWith(
+                                      color: Grey1, fontSize: 14 * textScale),
+                                  focusColor: Blue1,
+                                  fillColor: light,
+                                  filled: true,
+                                  errorStyle: TextStyle(
+                                    fontSize: 13.5 * textScale,
+                                    color: light,
+                                    background: Paint()
+                                      ..strokeWidth = 13
+                                      ..color = errorBg
+                                      ..style = PaintingStyle.stroke
+                                      ..strokeJoin = StrokeJoin.round,
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: errorBg, width: 1.8),
+                                      borderRadius: BorderRadius.circular(12),
+                                      gapPadding: 2),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: error, width: 1.8),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Blue1, width: 1.8),
+                                      borderRadius: BorderRadius.circular(12)),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(12))),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: bodyHeight * 0.005,
+                        ),
                         Obx(
                           () => Container(
                             width: bodyWidth * 1,
@@ -390,7 +454,8 @@ class RegisterView extends GetView<RegisterController> {
                           controller.nameC.text,
                           controller.emailC.text,
                           controller.passC.text,
-                          controller.roleC.value,
+                          controller.alamatC.text,
+                          controller.roleC.text,
                         ),
                       ),
                     ),

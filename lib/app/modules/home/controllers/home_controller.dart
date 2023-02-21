@@ -6,6 +6,17 @@ class HomeController extends GetxController {
 
   var currentIndex = 0.obs;
 
+  var selectedIndex = 1.obs;
+  var textValue = 0.obs;
+
+  void changeIndex(int index) {
+    selectedIndex.value = index;
+  }
+
+  void increaseValue() {
+    textValue.value++;
+  }
+
   changePage(int i) {
     currentIndex.value = i;
   }

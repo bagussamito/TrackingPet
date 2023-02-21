@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,7 +40,10 @@ class HomeView extends GetView<HomeController> {
             var role = snap.data!.get("role");
             if (role != "Admin") {
               return Scaffold(
-                body: Obx(() => pages[controller.currentIndex.value]),
+                body: Obx(() => IndexedStack(
+                      children: pages,
+                      index: controller.currentIndex.value,
+                    )),
                 bottomNavigationBar: Container(
                   decoration: BoxDecoration(
                     color: backgroundOrange,
@@ -51,15 +55,18 @@ class HomeView extends GetView<HomeController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      navBarItem(context, IconlyLight.home, 0),
-                      navBarItem(context, IconlyLight.time_circle, 1),
+                      navBarItem(context, FontAwesomeIcons.cartShopping, 0),
+                      navBarItem(context, FontAwesomeIcons.user, 1),
                     ],
                   ),
                 ),
               );
             } else {
               return Scaffold(
-                body: Obx(() => pages[controller.currentIndex.value]),
+                body: Obx(() => IndexedStack(
+                      children: pages,
+                      index: controller.currentIndex.value,
+                    )),
                 bottomNavigationBar: Container(
                   decoration: BoxDecoration(
                     color: backgroundOrange,
