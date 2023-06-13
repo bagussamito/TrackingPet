@@ -1,10 +1,13 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:petshop/app/controllers/fcm_controller.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
@@ -27,13 +30,19 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  final FCMController fcmController = FCMController();
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   await initializeDateFormatting('id_ID', null)
-      .then((_) => runApp(DelonixPetshop()));
+      .then((_) => runApp(DelonixPetshop(fcmController: fcmController)));
 }
 
 class DelonixPetshop extends StatelessWidget {
-  final authC = Get.put(AuthController(), permanent: true);
+  final FCMController fcmController;
+
+  const DelonixPetshop({Key? key, required this.fcmController})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,18 +50,21 @@ class DelonixPetshop extends StatelessWidget {
       minTextAdapt: true,
       builder: (context, child) {
         return AnnotatedRegion(
-            // ignore: prefer_const_constructors
-            value: SystemUiOverlayStyle(
-              statusBarIconBrightness: Brightness.dark,
-              statusBarBrightness: Brightness.dark,
-              statusBarColor: light,
-            ),
-            child: GetMaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: "GeekGarden Attendance",
-              getPages: AppPages.routes,
-              home: SplashScreen(),
-            ));
+          value: SystemUiOverlayStyle(
+            statusBarIconBrightness: Brightness.dark,
+            statusBarBrightness: Brightness.dark,
+            statusBarColor: light,
+          ),
+          child: GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: "GeekGarden Attendance",
+            getPages: AppPages.routes,
+            home: SplashScreen(),
+            initialBinding: BindingsBuilder(() {
+              Get.put(fcmController);
+            }),
+          ),
+        );
       },
     );
   }
@@ -84,7 +96,7 @@ class SplashScreen extends StatelessWidget {
                         snapshot.data!.emailVerified == true
                     ? Routes.HOME
                     : Routes.LOGIN,
-                splashIconSize: 55,
+                splashIconSize: 250,
                 splashTransition: SplashTransition.fadeTransition,
                 pageTransitionType: PageTransitionType.leftToRight,
               ),

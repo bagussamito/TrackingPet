@@ -73,7 +73,7 @@ class LoginView extends GetView<LoginController> {
                         Image.asset(
                           'assets/icons/logo.png',
                           width: bodyWidth * 0.5,
-                          height: bodyHeight * 0.05,
+                          height: bodyHeight * 0.20,
                         ),
                       ],
                     ),
@@ -103,9 +103,6 @@ class LoginView extends GetView<LoginController> {
                                 if (!currentFocus.hasPrimaryFocus) {
                                   currentFocus.unfocus();
                                 }
-
-                                // controller.iconEmail.value =
-                                //     !controller.iconEmail.value;
                               },
                               decoration: InputDecoration(
                                   prefixIcon: Align(
@@ -294,7 +291,7 @@ class LoginView extends GetView<LoginController> {
                           style: regular12pt.copyWith(color: light),
                         ),
                         GestureDetector(
-                          onTap: () => Get.to(RegisterView()),
+                          onTap: () => Get.to(() => RegisterView()),
                           child: Text(
                             'Daftar',
                             textScaleFactor: 0.8,

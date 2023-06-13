@@ -1,10 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:get/get.dart';
 import 'package:petshop/app/utils/loading.dart';
 
@@ -30,8 +28,12 @@ class AuthController extends GetxController {
   }
 
   //store user data
-  void syncUsers(String name, String email, String password, String alamat,
-      String role) async {
+  void syncUsers(
+    String name,
+    String email,
+    String password,
+    String alamat,
+  ) async {
     String uid = auth.currentUser!.uid.toString();
 
     CollectionReference users = firestore.collection('Users');
@@ -107,8 +109,8 @@ class AuthController extends GetxController {
   }
 
   //register
-  void register(String name, String email, String password, String role,
-      String alamat) async {
+  void register(
+      String name, String email, String password, String alamat) async {
     try {
       UserCredential myUser =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -117,7 +119,7 @@ class AuthController extends GetxController {
       );
 
       await myUser.user?.updateDisplayName(name);
-      syncUsers(name, email, password, role, alamat);
+      syncUsers(name, email, password, alamat);
       await myUser.user!.sendEmailVerification();
       Get.defaultDialog(
           title: 'Verifikasi Email',

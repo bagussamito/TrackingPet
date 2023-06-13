@@ -7,14 +7,17 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
 import 'package:petshop/app/controllers/auth_controller.dart';
+import 'package:petshop/app/modules/barang_admin/views/barang_admin_view.dart';
 import 'package:petshop/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:petshop/app/modules/dashboard_admin/views/dashboard_admin_view.dart';
+import 'package:petshop/app/modules/grooming/views/grooming_view.dart';
 import 'package:petshop/app/modules/grooming_admin/views/grooming_admin_view.dart';
 import 'package:petshop/app/modules/home/controllers/home_controller.dart';
 import 'package:petshop/app/modules/setting/views/setting_view.dart';
 import 'package:petshop/app/modules/setting_admin/views/setting_admin_view.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/loading.dart';
+import '../../barang_user/views/barang_user_view.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({Key? key}) : super(key: key);
@@ -24,8 +27,11 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     var pages = <Widget>[
       DashboardView(),
+      BarangUserView(),
+      GroomingView(),
       SettingView(),
       DashboardAdminView(),
+      BarangAdminView(),
       GroomingAdminView(),
       SettingAdminView()
     ];
@@ -40,10 +46,7 @@ class HomeView extends GetView<HomeController> {
             var role = snap.data!.get("role");
             if (role != "Admin") {
               return Scaffold(
-                body: Obx(() => IndexedStack(
-                      children: pages,
-                      index: controller.currentIndex.value,
-                    )),
+                body: Obx(() => pages[controller.currentIndex.value]),
                 bottomNavigationBar: Container(
                   decoration: BoxDecoration(
                     color: backgroundOrange,
@@ -55,18 +58,17 @@ class HomeView extends GetView<HomeController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      navBarItem(context, FontAwesomeIcons.cartShopping, 0),
-                      navBarItem(context, FontAwesomeIcons.user, 1),
+                      navBarItem(context, FontAwesomeIcons.house, 0),
+                      navBarItem(context, FontAwesomeIcons.cartShopping, 1),
+                      navBarItem(context, FontAwesomeIcons.shower, 2),
+                      navBarItem(context, FontAwesomeIcons.user, 3),
                     ],
                   ),
                 ),
               );
             } else {
               return Scaffold(
-                body: Obx(() => IndexedStack(
-                      children: pages,
-                      index: controller.currentIndex.value,
-                    )),
+                body: Obx(() => pages[controller.currentIndex.value]),
                 bottomNavigationBar: Container(
                   decoration: BoxDecoration(
                     color: backgroundOrange,
@@ -78,9 +80,10 @@ class HomeView extends GetView<HomeController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      navBarItem(context, FontAwesomeIcons.cartShopping, 2),
-                      navBarItem(context, FontAwesomeIcons.shower, 3),
-                      navBarItem(context, FontAwesomeIcons.user, 4),
+                      navBarItem(context, FontAwesomeIcons.house, 4),
+                      navBarItem(context, FontAwesomeIcons.cartShopping, 5),
+                      navBarItem(context, FontAwesomeIcons.shower, 6),
+                      navBarItem(context, FontAwesomeIcons.user, 7),
                     ],
                   ),
                 ),

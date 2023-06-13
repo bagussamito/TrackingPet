@@ -1,24 +1,242 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
 
 import 'package:get/get.dart';
+import 'package:iconly/iconly.dart';
+import 'package:intl/intl.dart';
 
+import '../../../routes/app_pages.dart';
+import '../../../theme/theme.dart';
+import '../../../utils/loading.dart';
+import '../../dashboard/controllers/dashboard_controller.dart';
 import '../controllers/grooming_admin_controller.dart';
 
 class GroomingAdminView extends GetView<GroomingAdminController> {
-  const GroomingAdminView({Key? key}) : super(key: key);
+  GroomingAdminView({Key? key}) : super(key: key);
+
+  final GroomingAdminController controller = Get.put(GroomingAdminController());
+
   @override
   Widget build(BuildContext context) {
+    final DashboardController dashboardController = Get.find();
     return Scaffold(
-      appBar: AppBar(
-        title: Text('GroomingAdminView'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Text(
-          'GroomingAdminView is working',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+      resizeToAvoidBottomInset: false,
+      backgroundColor: light,
+      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+          stream: controller.streamDataOrder(),
+          builder: (context, snap) {
+            if (snap.connectionState == ConnectionState.active) {
+              var listAllDocs = snap.data!.docs;
+
+              return LayoutBuilder(
+                builder: (context, constraints) {
+                  final textScale = MediaQuery.of(context).textScaleFactor;
+                  final bodyHeight = MediaQuery.of(context).size.height;
+                  -MediaQuery.of(context).padding.top;
+                  final bodyWidth = MediaQuery.of(context).size.width;
+                  return SingleChildScrollView(
+                    reverse: false,
+                    padding: EdgeInsets.only(
+                      left: bodyWidth * 0.05,
+                      right: bodyWidth * 0.05,
+                      bottom: bodyHeight * 0.01,
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: bodyHeight * 0.06,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Daftar Order Grooming",
+                                textAlign: TextAlign.start,
+                                textScaleFactor: 1,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w800,
+                                  color: Purple,
+                                  fontSize: 20,
+                                )),
+                          ],
+                        ),
+                        SizedBox(
+                          height: bodyHeight * 0.04,
+                        ),
+                        ListView.builder(
+                            shrinkWrap: true,
+                            padding: EdgeInsets.only(bottom: bodyHeight * 0.02),
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: snap.data!.docs.length,
+                            itemBuilder: (context, index) {
+                              Map<String, dynamic> data =
+                                  snap.data!.docs[index].data();
+                              var layanan = data['layanan'];
+                              var nama_hewan = data['selected item'];
+                              var addres = data['lokasi hewan']['address'];
+                              var name = data['name'];
+
+                              return Padding(
+                                padding:
+                                    EdgeInsets.only(bottom: bodyHeight * 0.015),
+                                child: Material(
+                                  color: Yellow1,
+                                  borderRadius: BorderRadius.circular(30),
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(30),
+                                    child: SizedBox(
+                                      width: bodyWidth * 1,
+                                      height: bodyHeight * 0.2,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                right: bodyWidth * 0.06,
+                                                left: bodyWidth * 0.06),
+                                            child: Row(
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    Text(
+                                                      "${DateFormat('d MMMM yyyy', 'id-ID').format(DateTime.parse(data['lokasi hewan']['date']))}",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 0.9,
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      "$layanan",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 0.9,
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      "$nama_hewan",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 0.9,
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      "$name",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 0.9,
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  width: bodyWidth * 0.16,
+                                                ),
+                                                Column(
+                                                  children: [
+                                                    SizedBox(
+                                                      height: bodyHeight * 0.02,
+                                                    ),
+                                                    Text(
+                                                      "Terima Grooming",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 0.9,
+                                                      style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                    IconButton(
+                                                      onPressed: () async {
+                                                        await dashboardController
+                                                            .updateOrderGroomingStatus(
+                                                                data['id'],
+                                                                'Diterima');
+                                                        Get.toNamed(
+                                                            Routes
+                                                                .LAYANAN_GROOMING_ADMIN,
+                                                            arguments: data);
+
+                                                        // await controller
+                                                        //     .sendNotificationToUser(
+                                                        //   uid,
+                                                        //   'Pesanan Layanan Grooming Diterima Oleh Admin',
+                                                        //   'Selamat Admin Sedang Memproses Layanan Anda!',
+                                                        // );
+                                                      },
+                                                      icon: Icon(
+                                                        Icons.check,
+                                                        color: dark,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                                right: bodyWidth * 0.06,
+                                                left: bodyWidth * 0.06),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  "Lokasi Hewan",
+                                                  textAlign: TextAlign.start,
+                                                  textScaleFactor: 0.9,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "$addres",
+                                                  textAlign: TextAlign.start,
+                                                  textScaleFactor: 0.9,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }),
+                        Padding(
+                            padding: EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom *
+                                        0.4))
+                      ],
+                    ),
+                  );
+                },
+              );
+            } else {
+              return LoadingView();
+            }
+          }),
     );
   }
 }

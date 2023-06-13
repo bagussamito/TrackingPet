@@ -1,6 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dropdown_search/dropdown_search.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -455,7 +452,6 @@ class RegisterView extends GetView<RegisterController> {
                           controller.emailC.text,
                           controller.passC.text,
                           controller.alamatC.text,
-                          controller.roleC.text,
                         ),
                       ),
                     ),
@@ -471,7 +467,7 @@ class RegisterView extends GetView<RegisterController> {
                           style: regular12pt.copyWith(color: light),
                         ),
                         GestureDetector(
-                          onTap: () => Get.to(LoginView()),
+                          onTap: () => Get.back(),
                           child: Text(
                             'Masuk',
                             textScaleFactor: 0.8,
