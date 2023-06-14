@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:petshop/app/modules/grooming/views/grooming_view.dart';
 import 'dart:convert';
 
 import '../../dashboard/controllers/dashboard_controller.dart';
@@ -13,13 +12,9 @@ class DetailGroomingController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final DashboardController dashboardController = Get.find();
 
-  DateTime? start;
-  DateTime end = DateTime.now();
-
-  RxList<String> steps = RxList<String>([]);
-
   void fetchSteps(String id) async {
     try {
+      // Ambil data layanan grooming admin berdasarkan ID
       var snapshot = await firestore.collection('Tracking').doc(id).get();
       if (snapshot.exists && snapshot.data() != null) {
         var data = snapshot.data()!;
@@ -36,30 +31,19 @@ class DetailGroomingController extends GetxController {
     }
   }
 
-  void updateStepsList(Map<String, dynamic>? data) {
-    steps.clear();
-    steps.addAll([
-      data?['step0'] ?? '',
-      data?['step1'] ?? '',
-      data?['step2'] ?? '',
-      data?['step3'] ?? '',
-    ]);
-  }
-
   Stream<DocumentSnapshot<Map<String, dynamic>>> getDataGroomingUser(
-      String id) async* {
+      String id) {
     var user = firestore.collection("Tracking").doc(id);
-    yield* user.snapshots();
+    return user.snapshots();
   }
 
   CollectionReference notificationsRef =
       FirebaseFirestore.instance.collection('Notifications');
 
-// Fungsi untuk mengirim notifikasi ke user
   Future<void> sendNotificationToUser(
       String uid, String title, String message) async {
     String serverKey =
-        'AAAA6JsekTQ:APA91bGryI4OESo9Aw6h_MnNep1wp9U4qed2MEA_suEuGeiBUwTYcgKw4RKh93upT1XlX9eUPX0KYoGy6Nurdz1Pok6Sv1nOZG8FNQhrwU_wsHEGYw3goqa_JgenBOR9BWfc0B1iil8b'; // Replace with your actual server key
+        'AAAA6JsekTQ:APA91bGryI4OESo9Aw6h_MnNep1wp9U4qed2MEA_suEuGeiBUwTYcgKw4RKh93upT1XlX9eUPX0KYoGy6Nurdz1Pok6Sv1nOZG8FNQhrwU_wsHEGYw3goqa_JgenBOR9BWfc0B1iil8b';
 
     DocumentSnapshot<Map<String, dynamic>> userSnapshot =
         await firestore.collection('Users').doc(uid).get();
@@ -67,7 +51,6 @@ class DetailGroomingController extends GetxController {
     String fcmToken = userSnapshot.data()?['fcmToken'] ?? '';
     List<String> tokens = [fcmToken];
 
-    // Kirim notifikasi ke token pengguna
     for (String token in tokens) {
       await notificationsRef.add({
         'title': title,
@@ -77,8 +60,7 @@ class DetailGroomingController extends GetxController {
         'token': token,
         'uid': uid,
       });
-      // dashboardController.updateOrderGroomingStatus(true);
-      // Kirim notifikasi FCM menggunakan HTTP POST request
+
       await http.post(
         Uri.parse('https://fcm.googleapis.com/fcm/send'),
         headers: <String, String>{
@@ -103,6 +85,21 @@ class DetailGroomingController extends GetxController {
       );
     }
   }
+
+  void goToNextStep() {
+    if (currentStep.value < steps.length - 1) {
+      currentStep.value++;
+    }
+  }
+
+  void goToPreviousStep() {
+    if (currentStep.value > 0) {
+      currentStep.value--;
+    }
+  }
+
+  RxInt currentStep = 0.obs;
+  RxList<String> steps = List<String>.filled(4, '', growable: false).obs;
 
   final count = 0.obs;
 

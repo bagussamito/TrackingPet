@@ -19,6 +19,7 @@ class SettingView extends GetView<SettingController> {
   SettingView({Key? key}) : super(key: key);
   final SettingController controller = Get.put(SettingController());
   @override
+  bool get wantKeepAlive => true;
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -113,7 +114,7 @@ class SettingView extends GetView<SettingController> {
                                           textScaleFactor: 1.2,
                                           overflow: TextOverflow.ellipsis,
                                           style: regular12pt.copyWith(
-                                              color: dark,
+                                              color: Purple,
                                               fontWeight: FontWeight.w700),
                                         ),
                                         SizedBox(
@@ -125,7 +126,7 @@ class SettingView extends GetView<SettingController> {
                                           textScaleFactor: 1.2,
                                           overflow: TextOverflow.ellipsis,
                                           style: regular12pt.copyWith(
-                                              color: dark,
+                                              color: Purple,
                                               fontWeight: FontWeight.w400),
                                         ),
                                       ],
@@ -139,7 +140,7 @@ class SettingView extends GetView<SettingController> {
                                               arguments: snap.data!.data()),
                                           icon: Icon(
                                             IconlyLight.edit,
-                                            color: dark,
+                                            color: Red1,
                                           ),
                                         ),
                                       ),
@@ -313,17 +314,6 @@ class SettingView extends GetView<SettingController> {
                                                   child: TextFormField(
                                                     textInputAction:
                                                         TextInputAction.next,
-                                                    onTap: () {
-                                                      FocusScopeNode
-                                                          currentFocus =
-                                                          FocusScope.of(
-                                                              context);
-
-                                                      if (!currentFocus
-                                                          .hasPrimaryFocus) {
-                                                        currentFocus.unfocus();
-                                                      }
-                                                    },
                                                     autovalidateMode:
                                                         AutovalidateMode
                                                             .onUserInteraction,
@@ -398,17 +388,6 @@ class SettingView extends GetView<SettingController> {
                                                   child: TextFormField(
                                                     textInputAction:
                                                         TextInputAction.next,
-                                                    onTap: () {
-                                                      FocusScopeNode
-                                                          currentFocus =
-                                                          FocusScope.of(
-                                                              context);
-
-                                                      if (!currentFocus
-                                                          .hasPrimaryFocus) {
-                                                        currentFocus.unfocus();
-                                                      }
-                                                    },
                                                     autovalidateMode:
                                                         AutovalidateMode
                                                             .onUserInteraction,
@@ -483,17 +462,6 @@ class SettingView extends GetView<SettingController> {
                                                   child: TextFormField(
                                                     textInputAction:
                                                         TextInputAction.next,
-                                                    onTap: () {
-                                                      FocusScopeNode
-                                                          currentFocus =
-                                                          FocusScope.of(
-                                                              context);
-
-                                                      if (!currentFocus
-                                                          .hasPrimaryFocus) {
-                                                        currentFocus.unfocus();
-                                                      }
-                                                    },
                                                     autovalidateMode:
                                                         AutovalidateMode
                                                             .onUserInteraction,
@@ -639,136 +607,108 @@ class SettingView extends GetView<SettingController> {
                             width: bodyWidth * 1,
                             height: bodyHeight * 0.2,
                             color: Colors.transparent,
-                            child: StreamBuilder<QuerySnapshot<Object?>>(
-                                stream: controller.getHewanDoc(),
-                                builder: (context, snap) {
-                                  if (snap.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return LoadingView();
-                                  }
-                                  if (snap.hasData) {
-                                    var listAllDocs = snap.data!.docs;
-                                    return ListView.builder(
-                                        shrinkWrap: true,
-                                        padding: EdgeInsets.only(
-                                            bottom: bodyHeight * 0.02,
-                                            top: bodyHeight * 0.01),
-                                        itemCount: listAllDocs.length,
-                                        // itemCount: 20,
-                                        itemBuilder: (context, index) {
-                                          return Padding(
-                                            padding: EdgeInsets.all(
-                                              bodyHeight * 0.006,
-                                            ),
-                                            child: Material(
-                                              color: backgroundOrange,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              child: InkWell(
-                                                onTap: () {},
-                                                child: SizedBox(
-                                                  width: bodyWidth * 1,
-                                                  height: bodyHeight * 0.06,
-                                                  child: Column(
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                            "Nama Hewan : ",
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            textScaleFactor: 1,
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color: Purple),
+                            child: FutureBuilder<List<Map<String, dynamic>>>(
+                              future: controller.getHewanData(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return CircularProgressIndicator();
+                                } else if (snapshot.hasError) {
+                                  return Text('Error: ${snapshot.error}');
+                                } else if (snapshot.hasData) {
+                                  List<Map<String, dynamic>> listAllDocs =
+                                      snapshot.data!;
+                                  return ListView.builder(
+                                    shrinkWrap: true,
+                                    padding: EdgeInsets.only(
+                                      bottom: bodyHeight * 0.02,
+                                      top: bodyHeight * 0.01,
+                                    ),
+                                    itemCount: listAllDocs.length,
+                                    itemBuilder: (context, index) {
+                                      var hewanData = listAllDocs[index];
+                                      String docId =
+                                          hewanData.containsKey('nama_hewan')
+                                              ? hewanData['nama_hewan']
+                                              : '';
+
+                                      return Padding(
+                                        padding:
+                                            EdgeInsets.all(bodyHeight * 0.006),
+                                        child: Material(
+                                          color: backgroundOrange,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: InkWell(
+                                            onTap: () {},
+                                            child: Row(
+                                              children: [
+                                                Expanded(
+                                                  child: SizedBox(
+                                                    height: bodyHeight * 0.075,
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          'Nama Hewan: ${hewanData["nama_hewan"]}',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Purple,
                                                           ),
-                                                          Text(
-                                                            "${(listAllDocs[index].data() as Map<String, dynamic>)["nama_hewan"]}",
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            textScaleFactor: 1,
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color: Purple),
+                                                        ),
+                                                        SizedBox(height: 4),
+                                                        Text(
+                                                          'Jenis Hewan: ${hewanData["jenis_hewan"]}',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Purple,
                                                           ),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                            "Jenis Hewan : ",
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            textScaleFactor: 1,
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color: Purple),
+                                                        ),
+                                                        SizedBox(height: 4),
+                                                        Text(
+                                                          'Umur Hewan: ${hewanData["umur_hewan"]}',
+                                                          style: TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Purple,
                                                           ),
-                                                          Text(
-                                                            "${(listAllDocs[index].data() as Map<String, dynamic>)["jenis_hewan"]}",
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            textScaleFactor: 1,
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color: Purple),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                            "Umur Hewan : ",
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            textScaleFactor: 1,
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color: Purple),
-                                                          ),
-                                                          Text(
-                                                            "${(listAllDocs[index].data() as Map<String, dynamic>)["umur_hewan"]}",
-                                                            textAlign:
-                                                                TextAlign.start,
-                                                            textScaleFactor: 1,
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color: Purple),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
+                                                InkWell(
+                                                  onTap: () {
+                                                    if (docId.isNotEmpty) {
+                                                      controller
+                                                          .deleteHewanData(
+                                                              docId);
+                                                    }
+                                                  },
+                                                  child: Icon(
+                                                    Icons.delete,
+                                                    color: Colors.red,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          );
-                                        });
-                                  } else {
-                                    return LoadingView();
-                                  }
-                                }),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                } else {
+                                  return Text('No data available');
+                                }
+                              },
+                            ),
                           ),
                           SizedBox(
                             height: bodyHeight * 0.025,
@@ -778,7 +718,7 @@ class SettingView extends GetView<SettingController> {
                             height: bodyHeight * 0.07,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(80),
-                              color: Blue1,
+                              color: Red1,
                             ),
                             child: TextButton(
                               onPressed: () => authC.logout(),

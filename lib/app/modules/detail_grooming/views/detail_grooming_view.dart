@@ -19,7 +19,7 @@ class DetailGroomingView extends GetView<DetailGroomingController> {
     FirebaseAuth auth = FirebaseAuth.instance;
 
     // Fetch the steps data when the view is initialized
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       controller.fetchSteps(id);
     });
 
@@ -52,25 +52,116 @@ class DetailGroomingView extends GetView<DetailGroomingController> {
                   ),
                   child: Column(
                     children: [
-                      Obx(() {
-                        if (controller.steps.isNotEmpty) {
-                          return Stepper(
-                            currentStep: controller.steps.length - 1,
-                            steps:
-                                List.generate(controller.steps.length, (index) {
-                              return Step(
-                                title: Text('Step ${index + 1}'),
-                                content: Text(controller.steps[index]),
-                                isActive: index == controller.steps.length - 1,
-                              );
-                            }).toList(),
-                          );
-                        } else {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      }),
+                      SizedBox(height: 20),
+                      Obx(
+                        () {
+                          if (controller.steps.isNotEmpty) {
+                            return Stepper(
+                              currentStep: controller.currentStep.value >=
+                                      controller.steps.length
+                                  ? controller.steps.length - 1
+                                  : controller.currentStep.value,
+                              onStepContinue: controller.goToNextStep,
+                              onStepCancel: controller.goToPreviousStep,
+                              steps: [
+                                Step(
+                                  title: Text('Step 0'),
+                                  content: Column(
+                                    children: [
+                                      Obx(
+                                        () {
+                                          if (controller.steps[0] != null) {
+                                            var step0Data =
+                                                controller.steps[0]!;
+                                            List<String> splitData =
+                                                step0Data.split(' - ');
+
+                                            String berat = splitData[0];
+                                            String waktu = splitData[1];
+
+                                            return Column(
+                                              children: [
+                                                Text('Berat: $berat'),
+                                                Text('Waktu: $waktu'),
+                                              ],
+                                            );
+                                          } else {
+                                            return const Text('No data');
+                                          }
+                                        },
+                                      ),
+                                      // Add other content widgets for Step 0 if needed
+                                    ],
+                                  ),
+                                  isActive: controller.currentStep.value == 0,
+                                ),
+                                Step(
+                                  title: Text('Step 1'),
+                                  content: Column(
+                                    children: [
+                                      Container(
+                                        width: bodyWidth * 0.46,
+                                        height: bodyHeight * 0.22,
+                                        // Image radius
+                                        child: Image.network(
+                                          controller.steps[1],
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  isActive: controller.currentStep.value == 1,
+                                ),
+                                Step(
+                                  title: Text('Step 0'),
+                                  content: Column(
+                                    children: [
+                                      Obx(
+                                        () {
+                                          if (controller.steps[2] != null) {
+                                            var step0Data =
+                                                controller.steps[2]!;
+                                            List<String> splitData =
+                                                step0Data.split(' - ');
+
+                                            String status = splitData[0];
+                                            String waktu = splitData[1];
+                                            String foto = splitData[2];
+
+                                            return Column(
+                                              children: [
+                                                Text('Berat: $status'),
+                                                Text('Waktu: $waktu'),
+                                                Container(
+                                                  width: bodyWidth * 0.46,
+                                                  height: bodyHeight * 0.22,
+                                                  // Image radius
+                                                  child: Image.network(
+                                                    '$foto',
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          } else {
+                                            return const Text('No data');
+                                          }
+                                        },
+                                      ),
+                                      // Add other content widgets for Step 0 if needed
+                                    ],
+                                  ),
+                                  isActive: controller.currentStep.value == 0,
+                                ),
+                              ],
+                            );
+                          } else {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        },
+                      ),
                     ],
                   ),
                 );

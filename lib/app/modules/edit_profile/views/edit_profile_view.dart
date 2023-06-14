@@ -29,6 +29,7 @@ class EditProfileView extends GetView<EditProfileController> {
       builder: (context, snap) {
         if (snap.connectionState == ConnectionState.done) {
           var nama = controller.nameC.text = user['name'];
+          var alamat = controller.alamatC.text = user['alamat'];
 
           String defaultImage =
               "https://ui-avatars.com/api/?name=${nama}&background=fff38a&color=5175c0&font-size=0.33";
@@ -137,17 +138,9 @@ class EditProfileView extends GetView<EditProfileController> {
                             width: bodyWidth * 1,
                             height: bodyHeight * 0.085,
                             child: TextFormField(
-                              style: TextStyle(color: dark),
+                              style: TextStyle(color: Purple),
                               controller: controller.nameC,
                               textInputAction: TextInputAction.next,
-                              onTap: () {
-                                FocusScopeNode currentFocus =
-                                    FocusScope.of(context);
-
-                                if (!currentFocus.hasPrimaryFocus) {
-                                  currentFocus.unfocus();
-                                }
-                              },
                               validator: controller.nameValidator,
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
@@ -157,13 +150,13 @@ class EditProfileView extends GetView<EditProfileController> {
                                       heightFactor: 1.0,
                                       child: Icon(
                                         IconlyLight.profile,
-                                        color: Blue1,
+                                        color: Red1,
                                       )),
                                   hintText: 'Nama',
                                   hintStyle: heading6.copyWith(
-                                      color: Grey2, fontSize: 14 * textScale),
-                                  focusColor: Blue1,
-                                  fillColor: Yellow1,
+                                      color: Purple, fontSize: 14 * textScale),
+                                  focusColor: Red1,
+                                  fillColor: Grey1,
                                   filled: true,
                                   errorStyle: TextStyle(
                                     fontSize: 13.5 * textScale,
@@ -199,17 +192,9 @@ class EditProfileView extends GetView<EditProfileController> {
                             width: bodyWidth * 1,
                             height: bodyHeight * 0.085,
                             child: TextFormField(
-                              style: TextStyle(color: dark),
+                              style: TextStyle(color: Purple),
                               controller: controller.alamatC,
                               textInputAction: TextInputAction.next,
-                              onTap: () {
-                                FocusScopeNode currentFocus =
-                                    FocusScope.of(context);
-
-                                if (!currentFocus.hasPrimaryFocus) {
-                                  currentFocus.unfocus();
-                                }
-                              },
                               validator: controller.alamatValidator,
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
@@ -219,13 +204,13 @@ class EditProfileView extends GetView<EditProfileController> {
                                       heightFactor: 1.0,
                                       child: Icon(
                                         IconlyLight.location,
-                                        color: Blue1,
+                                        color: Red1,
                                       )),
                                   hintText: 'Alamat',
                                   hintStyle: heading6.copyWith(
-                                      color: Grey2, fontSize: 14 * textScale),
-                                  focusColor: Blue1,
-                                  fillColor: Yellow1,
+                                      color: Purple, fontSize: 14 * textScale),
+                                  focusColor: Red1,
+                                  fillColor: Grey1,
                                   filled: true,
                                   errorStyle: TextStyle(
                                     fontSize: 13.5 * textScale,
@@ -263,7 +248,7 @@ class EditProfileView extends GetView<EditProfileController> {
                           height: bodyHeight * 0.07,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(80),
-                            color: Blue1,
+                            color: Red1,
                           ),
                           child: TextButton(
                             onPressed: () => controller.editProfil(
