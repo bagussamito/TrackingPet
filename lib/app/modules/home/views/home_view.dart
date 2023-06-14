@@ -30,6 +30,9 @@ class HomeView extends GetView<HomeController> {
       BarangUserView(),
       GroomingView(),
       SettingView(),
+    ];
+
+    var pages2 = <Widget>[
       DashboardAdminView(),
       BarangAdminView(),
       GroomingAdminView(),
@@ -68,7 +71,7 @@ class HomeView extends GetView<HomeController> {
               );
             } else {
               return Scaffold(
-                body: Obx(() => pages[controller.currentIndex.value]),
+                body: Obx(() => pages2[controller.currentIndex.value]),
                 bottomNavigationBar: Container(
                   decoration: BoxDecoration(
                     color: backgroundOrange,
@@ -80,10 +83,10 @@ class HomeView extends GetView<HomeController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      navBarItem(context, FontAwesomeIcons.house, 4),
-                      navBarItem(context, FontAwesomeIcons.cartShopping, 5),
-                      navBarItem(context, FontAwesomeIcons.shower, 6),
-                      navBarItem(context, FontAwesomeIcons.user, 7),
+                      navBarItem(context, FontAwesomeIcons.house, 0),
+                      navBarItem(context, FontAwesomeIcons.cartShopping, 1),
+                      navBarItem(context, FontAwesomeIcons.shower, 2),
+                      navBarItem(context, FontAwesomeIcons.user, 3),
                     ],
                   ),
                 ),

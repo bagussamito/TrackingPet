@@ -28,8 +28,7 @@ class FCMController extends GetxController {
     // Save FCM token to Firestore
     if (token != null) {
       String uid = FirebaseAuth.instance.currentUser!.uid;
-      DocumentReference userRef =
-          FirebaseFirestore.instance.collection('Users').doc(uid);
+      var userRef = FirebaseFirestore.instance.collection('Users').doc(uid);
       userRef.update({'fcmToken': token});
     }
   }

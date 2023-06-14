@@ -130,7 +130,7 @@ class SettingView extends GetView<SettingController> {
                                         ),
                                       ],
                                     ),
-                                     ClipOval(
+                                    ClipOval(
                                       child: Material(
                                         color: Colors.transparent,
                                         child: IconButton(
@@ -164,8 +164,7 @@ class SettingView extends GetView<SettingController> {
                                 textAlign: TextAlign.center,
                                 textScaleFactor: 1.1,
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                ),
+                                    fontWeight: FontWeight.w700, color: Purple),
                               ),
                               SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.45,
@@ -191,7 +190,7 @@ class SettingView extends GetView<SettingController> {
                             width: MediaQuery.of(context).size.width * 1,
                             height: bodyHeight * 0.065,
                             decoration: BoxDecoration(
-                                color: Yellow1,
+                                color: Grey1,
                                 borderRadius: BorderRadius.circular(12)),
                             child: Row(
                               children: [
@@ -204,6 +203,7 @@ class SettingView extends GetView<SettingController> {
                                     heightFactor: 1.0,
                                     child: Icon(
                                       IconlyLight.message,
+                                      color: Red1,
                                     )),
                                 SizedBox(
                                   width:
@@ -214,8 +214,8 @@ class SettingView extends GetView<SettingController> {
                                   textAlign: TextAlign.start,
                                   textScaleFactor: 1,
                                   style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                  ),
+                                      fontWeight: FontWeight.w400,
+                                      color: Purple),
                                 ),
                               ],
                             ),
@@ -227,7 +227,7 @@ class SettingView extends GetView<SettingController> {
                             width: MediaQuery.of(context).size.width * 1,
                             height: bodyHeight * 0.065,
                             decoration: BoxDecoration(
-                                color: Yellow1,
+                                color: Grey1,
                                 borderRadius: BorderRadius.circular(12)),
                             child: Row(
                               children: [
@@ -238,9 +238,7 @@ class SettingView extends GetView<SettingController> {
                                 Align(
                                     widthFactor: 1.0,
                                     heightFactor: 1.0,
-                                    child: Icon(
-                                      IconlyLight.lock,
-                                    )),
+                                    child: Icon(IconlyLight.lock, color: Red1)),
                                 SizedBox(
                                   width:
                                       MediaQuery.of(context).size.width * 0.015,
@@ -253,8 +251,8 @@ class SettingView extends GetView<SettingController> {
                                     textAlign: TextAlign.start,
                                     textScaleFactor: 1,
                                     style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                        fontWeight: FontWeight.w400,
+                                        color: Purple),
                                   ),
                                 ),
                               ],
@@ -271,15 +269,14 @@ class SettingView extends GetView<SettingController> {
                                 width: MediaQuery.of(context).size.width * 0.01,
                               ),
                               Text(
-                                "Data Hewan",
+                                "Tambah Data Hewan",
                                 textAlign: TextAlign.center,
                                 textScaleFactor: 1.1,
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                ),
+                                    fontWeight: FontWeight.w700, color: Purple),
                               ),
                               SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.55,
+                                width: MediaQuery.of(context).size.width * 0.35,
                               ),
                               ClipOval(
                                 child: Material(

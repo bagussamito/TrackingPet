@@ -36,17 +36,20 @@ class DetailGroomingController extends GetxController {
     }
   }
 
+  void updateStepsList(Map<String, dynamic>? data) {
+    steps.clear();
+    steps.addAll([
+      data?['step0'] ?? '',
+      data?['step1'] ?? '',
+      data?['step2'] ?? '',
+      data?['step3'] ?? '',
+    ]);
+  }
+
   Stream<DocumentSnapshot<Map<String, dynamic>>> getDataGroomingUser(
       String id) async* {
     var user = firestore.collection("Tracking").doc(id);
     yield* user.snapshots();
-  }
-
-  // Fungsi untuk memilih rentang tanggal
-  void pickRangeDate(DateTime pickStart, DateTime pickEnd) {
-    start = pickStart;
-    end = pickEnd;
-    update();
   }
 
   CollectionReference notificationsRef =
