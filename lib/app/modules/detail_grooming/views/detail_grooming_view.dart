@@ -65,7 +65,7 @@ class DetailGroomingView extends GetView<DetailGroomingController> {
                               onStepCancel: controller.goToPreviousStep,
                               steps: [
                                 Step(
-                                  title: Text('Step 0'),
+                                  title: Text('Step 1'),
                                   content: Column(
                                     children: [
                                       Obx(
@@ -96,7 +96,7 @@ class DetailGroomingView extends GetView<DetailGroomingController> {
                                   isActive: controller.currentStep.value == 0,
                                 ),
                                 Step(
-                                  title: Text('Step 1'),
+                                  title: Text('Step 2'),
                                   content: Column(
                                     children: [
                                       Container(
@@ -113,7 +113,7 @@ class DetailGroomingView extends GetView<DetailGroomingController> {
                                   isActive: controller.currentStep.value == 1,
                                 ),
                                 Step(
-                                  title: Text('Step 0'),
+                                  title: Text('Step 3'),
                                   content: Column(
                                     children: [
                                       Obx(
@@ -151,7 +151,7 @@ class DetailGroomingView extends GetView<DetailGroomingController> {
                                       // Add other content widgets for Step 0 if needed
                                     ],
                                   ),
-                                  isActive: controller.currentStep.value == 0,
+                                  isActive: controller.currentStep.value == 2,
                                 ),
                               ],
                             );

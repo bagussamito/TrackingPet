@@ -52,11 +52,14 @@ class BarangAdminController extends GetxController {
     try {
       await referenceImageUpload.putFile(file);
       uriImage = await referenceImageUpload.getDownloadURL();
-      await barang.doc(namabarang).set({
+      DocumentReference docRef = await barang.add({
+        // Menggunakan metode `add` untuk membuat document dengan ID otomatis
         "nama_barang": namabarang,
         "harga_barang": hargabarang,
         "foto_barang": uriImage,
       });
+
+      String docId = docRef.id;
 
       Get.defaultDialog(
         title: "Berhasil",
@@ -78,44 +81,23 @@ class BarangAdminController extends GetxController {
     }
   }
 
-  void editBarang(String namabarang, String hargabarang, String docID) async {
-    DocumentReference barang = firestore.collection("Barang").doc(docID);
-    String uriImage = '';
-    File file = File(image!.path);
-
-    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference referenceRoot = FirebaseStorage.instance.ref();
-    Reference referenceDirImage = referenceRoot.child('images');
-    Reference referenceImageUpload = referenceDirImage.child(uniqueFileName);
-
-    referenceImageUpload.putFile(file);
-
+  void editBarang(String docId, String namabarang, String hargabarang) async {
+    CollectionReference barang = firestore.collection('Barang');
+    DocumentReference docRef = barang.doc(docId);
     try {
-      uriImage = await referenceImageUpload.getDownloadURL();
-      Map<String, dynamic> data = {
+      print("Nama Barang sebelum pembaruan: $namabarang");
+
+      await docRef.update({
         "nama_barang": namabarang,
         "harga_barang": hargabarang,
-        "foto_barang": uriImage
-      };
-      if (image != null) {
-        File file = File(image!.path);
-        String ext = image!.name.split(".").last;
-
-        await referenceImageUpload.putFile(file);
-        await storage.ref('$docID/foto_barang.$ext').putFile(file);
-        String urmage =
-            await storage.ref('$docID/foto_barang.$ext').getDownloadURL();
-      }
-      await barang.update(data);
+      });
 
       Get.defaultDialog(
         title: "Berhasil",
         middleText: "Berhasil Mengubah Data",
         onConfirm: () {
           namabarangC.clear();
-
           hargabarangC.clear();
-
           Get.back();
           Get.back();
         },
@@ -162,16 +144,18 @@ class BarangAdminController extends GetxController {
   }
 
   void pickImage() async {
-    image =
-        await picker.pickImage(source: ImageSource.gallery, imageQuality: 75);
-    if (image != null) {
-      print(image!.name);
-      print(image!.name.split(".").last);
-      print(image!.path);
-    } else {
-      print(image);
+    if (image == null) {
+      image =
+          await picker.pickImage(source: ImageSource.gallery, imageQuality: 75);
+      if (image != null) {
+        print(image!.name);
+        print(image!.name.split(".").last);
+        print(image!.path);
+      } else {
+        print(image);
+      }
+      update();
     }
-    update();
   }
 
   final count = 0.obs;

@@ -14,6 +14,7 @@ import 'package:petshop/app/theme/theme.dart';
 import 'package:petshop/app/utils/loading.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
 
+import '../../../routes/app_pages.dart';
 import '../controllers/barang_admin_controller.dart';
 
 class BarangAdminView extends GetView<BarangAdminController> {
@@ -433,6 +434,7 @@ class BarangAdminView extends GetView<BarangAdminController> {
                               itemCount: listAllDocs.length,
                               // itemCount: 20,
                               itemBuilder: (context, index) {
+                                var barangData = listAllDocs[index];
                                 var foto_barang = {
                                   (listAllDocs[index].data()
                                       as Map<String, dynamic>)["foto_barang"]
@@ -472,12 +474,12 @@ class BarangAdminView extends GetView<BarangAdminController> {
                                               ),
                                             ),
                                             Text(
-                                              "${(listAllDocs[index].data() as Map<String, dynamic>)["nama_barang"]}",
+                                              "${barangData["nama_barang"]}",
                                               textAlign: TextAlign.start,
                                               textScaleFactor: 1,
                                               style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                              ),
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Purple),
                                             ),
                                             Row(
                                               mainAxisAlignment:
@@ -491,25 +493,305 @@ class BarangAdminView extends GetView<BarangAdminController> {
                                                   width: bodyWidth * 0.02,
                                                 ),
                                                 Text(
-                                                  "${(listAllDocs[index].data() as Map<String, dynamic>)["harga_barang"]}",
+                                                  "${barangData["harga_barang"]}",
                                                   textAlign: TextAlign.start,
                                                   textScaleFactor: 1,
                                                   style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: Purple),
                                                 ),
                                                 ClipOval(
                                                   child: Material(
                                                     color: Colors.transparent,
                                                     child: IconButton(
                                                       onPressed: () {
-                                                        Get.to(
-                                                            () =>
-                                                                (UpdatebarangView()),
-                                                            arguments:
-                                                                listAllDocs[
-                                                                        index]
-                                                                    .data());
+                                                        String docId =
+                                                            listAllDocs[index]
+                                                                .id;
+                                                        Get.dialog(Dialog(
+                                                          shape: RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20)),
+                                                          backgroundColor:
+                                                              Color.fromRGBO(
+                                                                  255,
+                                                                  255,
+                                                                  255,
+                                                                  1),
+                                                          child: Container(
+                                                            width:
+                                                                bodyWidth * 2,
+                                                            height: bodyHeight *
+                                                                0.5,
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    15),
+                                                            child: Column(
+                                                              children: [
+                                                                Text(
+                                                                    "Edit Barang",
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    textScaleFactor:
+                                                                        1,
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w800,
+                                                                      color:
+                                                                          Purple,
+                                                                    )),
+                                                                SizedBox(
+                                                                  height:
+                                                                      bodyHeight *
+                                                                          0.02,
+                                                                ),
+                                                                ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              10), // Image border
+                                                                  child:
+                                                                      Container(
+                                                                    width:
+                                                                        bodyWidth *
+                                                                            0.26,
+                                                                    height:
+                                                                        bodyHeight *
+                                                                            0.12,
+                                                                    // Image radius
+                                                                    child: Image
+                                                                        .network(
+                                                                      "${(listAllDocs[index].data() as Map<String, dynamic>)["foto_barang"]}" !=
+                                                                              null
+                                                                          ? "${(listAllDocs[index].data() as Map<String, dynamic>)["foto_barang"]}" != ""
+                                                                              ? "${(listAllDocs[index].data() as Map<String, dynamic>)["foto_barang"]}"
+                                                                              : defaultImage
+                                                                          : defaultImage,
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height:
+                                                                      bodyHeight *
+                                                                          0.02,
+                                                                ),
+                                                                Form(
+                                                                  key: controller
+                                                                      .namabarangKey
+                                                                      .value,
+                                                                  child:
+                                                                      TextFormField(
+                                                                    textInputAction:
+                                                                        TextInputAction
+                                                                            .next,
+                                                                    onTap: () {
+                                                                      FocusScopeNode
+                                                                          currentFocus =
+                                                                          FocusScope.of(
+                                                                              context);
+
+                                                                      if (!currentFocus
+                                                                          .hasPrimaryFocus) {
+                                                                        currentFocus
+                                                                            .unfocus();
+                                                                      }
+                                                                    },
+                                                                    autovalidateMode:
+                                                                        AutovalidateMode
+                                                                            .onUserInteraction,
+                                                                    controller:
+                                                                        controller
+                                                                            .namabarangC,
+                                                                    style: TextStyle(
+                                                                        color:
+                                                                            dark),
+                                                                    decoration: InputDecoration(
+                                                                        prefixIcon: Align(
+                                                                            widthFactor: 1.0,
+                                                                            heightFactor: 1.0,
+                                                                            child: Icon(
+                                                                              Icons.input_sharp,
+                                                                              color: Red1,
+                                                                            )),
+                                                                        hintText: 'Nama Barang',
+                                                                        hintStyle: heading6.copyWith(color: Grey1, fontSize: 14),
+                                                                        focusColor: Blue1,
+                                                                        fillColor: light,
+                                                                        filled: true,
+                                                                        errorStyle: TextStyle(
+                                                                          fontSize:
+                                                                              13.5,
+                                                                          color:
+                                                                              light,
+                                                                          background: Paint()
+                                                                            ..strokeWidth =
+                                                                                13
+                                                                            ..color =
+                                                                                errorBg
+                                                                            ..style =
+                                                                                PaintingStyle.stroke
+                                                                            ..strokeJoin = StrokeJoin.round,
+                                                                        ),
+                                                                        errorBorder: OutlineInputBorder(borderSide: BorderSide(color: errorBg, width: 1.8), borderRadius: BorderRadius.circular(12), gapPadding: 2),
+                                                                        focusedErrorBorder: OutlineInputBorder(borderSide: BorderSide(color: error, width: 1.8), borderRadius: BorderRadius.circular(12)),
+                                                                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Blue1, width: 1.8), borderRadius: BorderRadius.circular(12)),
+                                                                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12))),
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height:
+                                                                      bodyHeight *
+                                                                          0.02,
+                                                                ),
+                                                                Form(
+                                                                  key: controller
+                                                                      .hargabarangKey
+                                                                      .value,
+                                                                  child:
+                                                                      TextFormField(
+                                                                    inputFormatters: <
+                                                                        TextInputFormatter>[
+                                                                      FilteringTextInputFormatter
+                                                                          .allow(
+                                                                              RegExp(r'[0-9]')),
+                                                                    ],
+                                                                    textInputAction:
+                                                                        TextInputAction
+                                                                            .next,
+                                                                    onTap: () {
+                                                                      FocusScopeNode
+                                                                          currentFocus =
+                                                                          FocusScope.of(
+                                                                              context);
+
+                                                                      if (!currentFocus
+                                                                          .hasPrimaryFocus) {
+                                                                        currentFocus
+                                                                            .unfocus();
+                                                                      }
+                                                                    },
+                                                                    autovalidateMode:
+                                                                        AutovalidateMode
+                                                                            .onUserInteraction,
+                                                                    controller:
+                                                                        controller
+                                                                            .hargabarangC,
+                                                                    style: TextStyle(
+                                                                        color:
+                                                                            dark),
+                                                                    decoration: InputDecoration(
+                                                                        prefixIcon: Align(
+                                                                            widthFactor: 1.0,
+                                                                            heightFactor: 1.0,
+                                                                            child: FaIcon(
+                                                                              FontAwesomeIcons.moneyBill1,
+                                                                              color: Red1,
+                                                                            )),
+                                                                        hintText: 'Harga Barang',
+                                                                        hintStyle: heading6.copyWith(color: Grey1, fontSize: 14),
+                                                                        focusColor: Blue1,
+                                                                        fillColor: light,
+                                                                        filled: true,
+                                                                        errorStyle: TextStyle(
+                                                                          fontSize:
+                                                                              13.5,
+                                                                          color:
+                                                                              light,
+                                                                          background: Paint()
+                                                                            ..strokeWidth =
+                                                                                13
+                                                                            ..color =
+                                                                                errorBg
+                                                                            ..style =
+                                                                                PaintingStyle.stroke
+                                                                            ..strokeJoin = StrokeJoin.round,
+                                                                        ),
+                                                                        errorBorder: OutlineInputBorder(borderSide: BorderSide(color: errorBg, width: 1.8), borderRadius: BorderRadius.circular(12), gapPadding: 2),
+                                                                        focusedErrorBorder: OutlineInputBorder(borderSide: BorderSide(color: error, width: 1.8), borderRadius: BorderRadius.circular(12)),
+                                                                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Blue1, width: 1.8), borderRadius: BorderRadius.circular(12)),
+                                                                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12))),
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height:
+                                                                      bodyHeight *
+                                                                          0.05,
+                                                                ),
+                                                                Row(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(15),
+                                                                        color:
+                                                                            backgroundOrange,
+                                                                      ),
+                                                                      width:
+                                                                          bodyWidth *
+                                                                              0.2,
+                                                                      height:
+                                                                          bodyHeight *
+                                                                              0.05,
+                                                                      child:
+                                                                          TextButton(
+                                                                        child:
+                                                                            Text(
+                                                                          "Simpan",
+                                                                          style:
+                                                                              TextStyle(color: Purple),
+                                                                        ),
+                                                                        onPressed: () => controller.editBarang(
+                                                                            controller.namabarangC.text,
+                                                                            controller.hargabarangC.text,
+                                                                            docId),
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      width: bodyWidth *
+                                                                          0.02,
+                                                                    ),
+                                                                    Container(
+                                                                      decoration:
+                                                                          BoxDecoration(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(15),
+                                                                        color:
+                                                                            backgroundOrange,
+                                                                      ),
+                                                                      width:
+                                                                          bodyWidth *
+                                                                              0.2,
+                                                                      height:
+                                                                          bodyHeight *
+                                                                              0.05,
+                                                                      child: TextButton(
+                                                                          child: Text(
+                                                                            "Batal",
+                                                                            style:
+                                                                                TextStyle(color: Purple),
+                                                                          ),
+                                                                          onPressed: () {
+                                                                            Get.back();
+                                                                          }),
+                                                                    ),
+                                                                  ],
+                                                                )
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ));
                                                       },
                                                       icon: FaIcon(
                                                         FontAwesomeIcons.pencil,

@@ -116,7 +116,7 @@ class SettingAdminView extends GetView<SettingAdminController> {
                                             textScaleFactor: 1.2,
                                             overflow: TextOverflow.ellipsis,
                                             style: regular12pt.copyWith(
-                                                color: dark,
+                                                color: Purple,
                                                 fontWeight: FontWeight.w700),
                                           ),
                                           SizedBox(
@@ -147,8 +147,7 @@ class SettingAdminView extends GetView<SettingAdminController> {
                               height: bodyHeight * 0.075,
                             ),
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
                                   width:
@@ -162,24 +161,6 @@ class SettingAdminView extends GetView<SettingAdminController> {
                                     fontWeight: FontWeight.w700,
                                   ),
                                 ),
-                                SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.45,
-                                ),
-                                // ClipOval(
-                                //   child: Material(
-                                //     color: Colors.transparent,
-                                //     child: IconButton(
-                                //       onPressed: () => Get.toNamed(
-                                //           Routes.EDIT_EMAILPASS_H_R,
-                                //           arguments: snap.data!.data()),
-                                //       icon: Icon(
-                                //         IconlyLight.edit,
-                                //         color: dark,
-                                //       ),
-                                //     ),
-                                //   ),
-                                // )
                               ],
                             ),
                             SizedBox(
@@ -189,7 +170,7 @@ class SettingAdminView extends GetView<SettingAdminController> {
                               width: MediaQuery.of(context).size.width * 1,
                               height: bodyHeight * 0.065,
                               decoration: BoxDecoration(
-                                  color: Yellow1,
+                                  color: Grey1,
                                   borderRadius: BorderRadius.circular(12)),
                               child: Row(
                                 children: [
@@ -202,6 +183,7 @@ class SettingAdminView extends GetView<SettingAdminController> {
                                       heightFactor: 1.0,
                                       child: Icon(
                                         IconlyLight.message,
+                                        color: Red1,
                                       )),
                                   SizedBox(
                                     width: MediaQuery.of(context).size.width *
@@ -212,8 +194,8 @@ class SettingAdminView extends GetView<SettingAdminController> {
                                     textAlign: TextAlign.start,
                                     textScaleFactor: 1,
                                     style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                        fontWeight: FontWeight.w400,
+                                        color: Purple),
                                   ),
                                 ],
                               ),
@@ -225,7 +207,7 @@ class SettingAdminView extends GetView<SettingAdminController> {
                               width: MediaQuery.of(context).size.width * 1,
                               height: bodyHeight * 0.065,
                               decoration: BoxDecoration(
-                                  color: Yellow1,
+                                  color: Grey1,
                                   borderRadius: BorderRadius.circular(12)),
                               child: Row(
                                 children: [
@@ -238,6 +220,7 @@ class SettingAdminView extends GetView<SettingAdminController> {
                                       heightFactor: 1.0,
                                       child: Icon(
                                         IconlyLight.lock,
+                                        color: Red1,
                                       )),
                                   SizedBox(
                                     width: MediaQuery.of(context).size.width *
@@ -251,8 +234,8 @@ class SettingAdminView extends GetView<SettingAdminController> {
                                       textAlign: TextAlign.start,
                                       textScaleFactor: 1,
                                       style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                      ),
+                                          fontWeight: FontWeight.w400,
+                                          color: Purple),
                                     ),
                                   ),
                                 ],
@@ -266,7 +249,7 @@ class SettingAdminView extends GetView<SettingAdminController> {
                               height: bodyHeight * 0.07,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(80),
-                                color: Blue1,
+                                color: Red1,
                               ),
                               child: TextButton(
                                 onPressed: () => authC.logout(),

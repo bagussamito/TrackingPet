@@ -600,9 +600,6 @@ class SettingView extends GetView<SettingController> {
                               )
                             ],
                           ),
-                          SizedBox(
-                            height: bodyHeight * 0.005,
-                          ),
                           Container(
                             width: bodyWidth * 1,
                             height: bodyHeight * 0.2,
@@ -639,66 +636,62 @@ class SettingView extends GetView<SettingController> {
                                           color: backgroundOrange,
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          child: InkWell(
-                                            onTap: () {},
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  child: SizedBox(
-                                                    height: bodyHeight * 0.075,
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          'Nama Hewan: ${hewanData["nama_hewan"]}',
-                                                          style: TextStyle(
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                child: SizedBox(
+                                                  height: bodyHeight * 0.09,
+                                                  child: Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        'Nama Hewan : ${hewanData["nama_hewan"]}',
+                                                        textScaleFactor: 1,
+                                                        style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.w400,
-                                                            color: Purple,
-                                                          ),
-                                                        ),
-                                                        SizedBox(height: 4),
-                                                        Text(
-                                                          'Jenis Hewan: ${hewanData["jenis_hewan"]}',
-                                                          style: TextStyle(
+                                                            color: Purple),
+                                                      ),
+                                                      SizedBox(height: 4),
+                                                      Text(
+                                                        'Jenis Hewan : ${hewanData["jenis_hewan"]}',
+                                                        textScaleFactor: 1,
+                                                        style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.w400,
-                                                            color: Purple,
-                                                          ),
-                                                        ),
-                                                        SizedBox(height: 4),
-                                                        Text(
-                                                          'Umur Hewan: ${hewanData["umur_hewan"]}',
-                                                          style: TextStyle(
+                                                            color: Purple),
+                                                      ),
+                                                      SizedBox(height: 4),
+                                                      Text(
+                                                        'Umur Hewan : ${hewanData["umur_hewan"]}',
+                                                        textScaleFactor: 1,
+                                                        style: TextStyle(
                                                             fontWeight:
                                                                 FontWeight.w400,
-                                                            color: Purple,
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
+                                                            color: Purple),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
-                                                InkWell(
-                                                  onTap: () {
-                                                    if (docId.isNotEmpty) {
-                                                      controller
-                                                          .deleteHewanData(
-                                                              docId);
-                                                    }
-                                                  },
-                                                  child: Icon(
-                                                    Icons.delete,
-                                                    color: Colors.red,
-                                                  ),
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  if (docId.isNotEmpty) {
+                                                    controller
+                                                        .deleteHewanData(docId);
+                                                  }
+                                                },
+                                                child: Icon(
+                                                  Icons.delete,
+                                                  color: Colors.red,
                                                 ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       );

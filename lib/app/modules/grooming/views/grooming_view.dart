@@ -97,6 +97,8 @@ class GroomingView extends GetView<GroomingController> {
                                               itemCount: listAllDocs.length,
                                               // itemCount: 20,
                                               itemBuilder: (context, index) {
+                                                var hewanData =
+                                                    listAllDocs[index];
                                                 bool isSelected =
                                                     controller.selectedItem ==
                                                         listAllDocs[index].id;
@@ -125,9 +127,12 @@ class GroomingView extends GetView<GroomingController> {
                                                         },
                                                         child: SizedBox(
                                                           width: bodyWidth * 1,
-                                                          height:
-                                                              bodyHeight * 0.06,
+                                                          height: bodyHeight *
+                                                              0.071,
                                                           child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
                                                             children: [
                                                               Row(
                                                                 mainAxisAlignment:
@@ -135,21 +140,7 @@ class GroomingView extends GetView<GroomingController> {
                                                                         .center,
                                                                 children: [
                                                                   Text(
-                                                                    "Nama Hewan : ",
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    textScaleFactor:
-                                                                        1,
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w400,
-                                                                        color:
-                                                                            Purple),
-                                                                  ),
-                                                                  Text(
-                                                                    "${(listAllDocs[index].data() as Map<String, dynamic>)["nama_hewan"]}",
+                                                                    "Nama Hewan : ${hewanData["nama_hewan"]}",
                                                                     textAlign:
                                                                         TextAlign
                                                                             .start,
@@ -170,21 +161,7 @@ class GroomingView extends GetView<GroomingController> {
                                                                         .center,
                                                                 children: [
                                                                   Text(
-                                                                    "Jenis Hewan : ",
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    textScaleFactor:
-                                                                        1,
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w400,
-                                                                        color:
-                                                                            Purple),
-                                                                  ),
-                                                                  Text(
-                                                                    "${(listAllDocs[index].data() as Map<String, dynamic>)["jenis_hewan"]}",
+                                                                    "Jenis Hewan : ${hewanData["jenis_hewan"]}",
                                                                     textAlign:
                                                                         TextAlign
                                                                             .start,
@@ -205,21 +182,7 @@ class GroomingView extends GetView<GroomingController> {
                                                                         .center,
                                                                 children: [
                                                                   Text(
-                                                                    "Umur Hewan : ",
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    textScaleFactor:
-                                                                        1,
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w400,
-                                                                        color:
-                                                                            Purple),
-                                                                  ),
-                                                                  Text(
-                                                                    "${(listAllDocs[index].data() as Map<String, dynamic>)["umur_hewan"]}",
+                                                                    "Umur Hewan : ${hewanData["umur_hewan"]}",
                                                                     textAlign:
                                                                         TextAlign
                                                                             .start,
@@ -431,9 +394,6 @@ class GroomingView extends GetView<GroomingController> {
                                       ),
                                       SizedBox(
                                         height: bodyHeight * 0.05,
-                                      ),
-                                      SizedBox(
-                                        height: bodyHeight * 0.02,
                                       ),
                                       Container(
                                         width: bodyWidth * 1,

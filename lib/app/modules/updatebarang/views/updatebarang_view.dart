@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -9,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../../theme/theme.dart';
+import '../../../utils/loading.dart';
 import '../controllers/updatebarang_controller.dart';
 
 class UpdatebarangView extends GetView<UpdatebarangController> {
@@ -18,16 +18,21 @@ class UpdatebarangView extends GetView<UpdatebarangController> {
   final GlobalKey<FormState> hargabarangKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final barang = Get.arguments;
-    var nama_barang = barang['nama_barang'];
+    final List<QueryDocumentSnapshot<Map<String, dynamic>>> listAllDocs =
+        Get.arguments;
+    var namaBarang = listAllDocs[0].data()!['nama_barang'];
 
-    return FutureBuilder<DocumentSnapshot<Object?>>(
-        future: controller.getData(nama_barang),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            var data = snapshot.data!.data() as Map<String, dynamic>;
-            controller.namabarangC.text = data['nama_barang'];
-            controller.hargabarangC.text = data['harga_barang'];
+    return StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+        stream: controller.getBarangDoc(namaBarang),
+        builder: (context, snap) {
+          if (snap.connectionState == ConnectionState.waiting) {
+            return LoadingView();
+          }
+          if (snap.hasData) {
+            var listAllDocs = snap.data;
+
+            controller.namabarangC.text = listAllDocs!['nama_barang'];
+            controller.hargabarangC.text = listAllDocs!['harga_barang'];
 
             return LayoutBuilder(builder: (context, Constraints) {
               final textScale = MediaQuery.of(context).textScaleFactor;
@@ -209,7 +214,7 @@ class UpdatebarangView extends GetView<UpdatebarangController> {
                                     onPressed: () => controller.editBarang(
                                         controller.namabarangC.text,
                                         controller.hargabarangC.text,
-                                        nama_barang),
+                                        namaBarang),
                                   ),
                                 ),
                                 SizedBox(

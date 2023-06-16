@@ -62,7 +62,7 @@ class GroomingAdminView extends GetView<GroomingAdminController> {
                           ],
                         ),
                         SizedBox(
-                          height: bodyHeight * 0.04,
+                          height: bodyHeight * 0.025,
                         ),
                         ListView.builder(
                           shrinkWrap: true,
@@ -84,180 +84,221 @@ class GroomingAdminView extends GetView<GroomingAdminController> {
                               child: Material(
                                 color: Grey1,
                                 borderRadius: BorderRadius.circular(30),
-                                child: InkWell(
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: SizedBox(
-                                    width: bodyWidth * 1,
-                                    height: bodyHeight * 0.35,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
+                                child: SizedBox(
+                                  width: bodyWidth * 1,
+                                  height: bodyHeight * 0.28,
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Padding(
                                           padding: EdgeInsets.only(
                                             right: bodyWidth * 0.06,
-                                            left: bodyWidth * 0.06,
+                                            left: bodyWidth * 0.03,
                                             top: bodyHeight * 0.02,
+                                            bottom: bodyHeight * 0.02,
                                           ),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "Tanggal: ",
-                                                    textAlign: TextAlign.start,
-                                                    textScaleFactor: 0.9,
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Purple,
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    bottom: bodyHeight * 0.003),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "Tanggal: ",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 1,
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple),
                                                     ),
-                                                  ),
-                                                  Text(
-                                                    "${DateFormat('d MMMM yyyy', 'id-ID').format(DateTime.parse(data['lokasi hewan']['date']))}",
-                                                    textAlign: TextAlign.start,
-                                                    textScaleFactor: 0.9,
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Purple,
+                                                    Text(
+                                                      "${DateFormat('d MMMM yyyy', 'id-ID').format(DateTime.parse(data['lokasi hewan']['date']))}",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 1,
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "Layanan yang diambil: ",
-                                                    textAlign: TextAlign.start,
-                                                    textScaleFactor: 0.9,
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Purple,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    "$layanan",
-                                                    textAlign: TextAlign.start,
-                                                    textScaleFactor: 0.9,
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Purple,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "Nama Hewan: ",
-                                                    textAlign: TextAlign.start,
-                                                    textScaleFactor: 0.9,
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Purple,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    "$nama_hewan",
-                                                    textAlign: TextAlign.start,
-                                                    textScaleFactor: 0.9,
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Purple,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "Nama Pemesan: ",
-                                                    textAlign: TextAlign.start,
-                                                    textScaleFactor: 0.9,
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Purple,
-                                                    ),
-                                                  ),
-                                                  Text(
-                                                    "$name",
-                                                    textAlign: TextAlign.start,
-                                                    textScaleFactor: 0.9,
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Purple,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            right: bodyWidth * 0.06,
-                                            left: bodyWidth * 0.06,
-                                            top: bodyHeight * 0.02,
-                                          ),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                "Lokasi Hewan: ",
-                                                textAlign: TextAlign.start,
-                                                textScaleFactor: 0.9,
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Purple,
+                                                  ],
                                                 ),
                                               ),
-                                              Text(
-                                                "$addres",
-                                                textAlign: TextAlign.start,
-                                                textScaleFactor: 0.9,
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Purple,
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    bottom: bodyHeight * 0.003),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "Layanan yang diambil: ",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 1,
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple),
+                                                    ),
+                                                    Text(
+                                                      "$layanan",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 1,
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                              IconButton(
-                                                onPressed: () async {
-                                                  await dashboardController
-                                                      .updateOrderGroomingStatus(
-                                                          data['id'],
-                                                          'Diterima');
-                                                  Get.toNamed(
-                                                      Routes
-                                                          .LAYANAN_GROOMING_ADMIN,
-                                                      arguments: data);
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    bottom: bodyHeight * 0.003),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Expanded(
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            "Nama Hewan: ",
+                                                            textAlign:
+                                                                TextAlign.start,
+                                                            textScaleFactor: 1,
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Purple),
+                                                          ),
+                                                          Text(
+                                                            "$nama_hewan",
+                                                            textAlign:
+                                                                TextAlign.start,
+                                                            textScaleFactor: 1,
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Purple),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      children: [
+                                                        Text(
+                                                          "Terima Layanan",
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                          textScaleFactor: 1,
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              color: Purple),
+                                                        ),
+                                                        IconButton(
+                                                          onPressed: () async {
+                                                            await dashboardController
+                                                                .updateOrderGroomingStatus(
+                                                              data['id'],
+                                                              'Diterima',
+                                                            );
+                                                            Get.toNamed(
+                                                              Routes
+                                                                  .LAYANAN_GROOMING_ADMIN,
+                                                              arguments: data,
+                                                            );
 
-                                                  await controller
-                                                      .sendNotificationToUser(
-                                                    uid,
-                                                    'Pesanan Layanan Grooming Diterima Oleh Admin',
-                                                    'Selamat Admin Sedang Memproses Layanan Anda!',
-                                                  );
-                                                },
-                                                icon: Icon(
-                                                  Icons.check,
-                                                  color: Purple,
+                                                            await controller
+                                                                .sendNotificationToUser(
+                                                              uid,
+                                                              'Pesanan Layanan Grooming Diterima Oleh Admin',
+                                                              'Selamat Admin Sedang Memproses Layanan Anda!',
+                                                            );
+                                                          },
+                                                          icon: Icon(
+                                                            Icons.check,
+                                                            color: Purple,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    bottom: bodyHeight * 0.003),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "Nama Pemesan: ",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 1,
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple),
+                                                    ),
+                                                    Text(
+                                                      "$name",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 1,
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    top: bodyHeight * 0.003),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      "Lokasi Hewan: ",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 1,
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple),
+                                                    ),
+                                                    Text(
+                                                      "$addres",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 1,
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ],
                                           ),
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),

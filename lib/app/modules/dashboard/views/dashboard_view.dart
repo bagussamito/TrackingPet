@@ -116,6 +116,9 @@ class DashboardView extends GetView<DashboardController> {
                                   )),
                             ],
                           ),
+                          SizedBox(
+                            height: bodyHeight * 0.01,
+                          ),
                           ListView.builder(
                             shrinkWrap: true,
                             padding: EdgeInsets.only(bottom: bodyHeight * 0.02),

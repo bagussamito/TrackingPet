@@ -19,22 +19,15 @@ class UpdatebarangController extends GetxController {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  Future<DocumentSnapshot<Object?>> getData(String nama_barang) async {
-    DocumentReference docRef = firestore.collection("Barang").doc(nama_barang);
-    return docRef.get();
+  Stream<DocumentSnapshot<Map<String, dynamic>>> getBarangDoc(
+      String namaBarang) async* {
+    var barang = firestore.collection("Barang").doc(namaBarang);
+    yield* barang.snapshots();
   }
 
-  void pickImage() async {
-    image =
-        await picker.pickImage(source: ImageSource.gallery, imageQuality: 75);
-    if (image != null) {
-      print(image!.name);
-      print(image!.name.split(".").last);
-      print(image!.path);
-    } else {
-      print(image);
-    }
-    update();
+  Future<DocumentSnapshot<Object?>> getData(String namaBarang) async {
+    DocumentReference docRef = firestore.collection("Barang").doc(namaBarang);
+    return docRef.get();
   }
 
   void editBarang(
