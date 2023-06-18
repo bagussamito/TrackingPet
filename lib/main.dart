@@ -8,14 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:petshop/app/controllers/fcm_controller.dart';
 
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:petshop/app/modules/login/views/login_view.dart';
 import 'package:petshop/app/modules/register/views/register_view.dart';
 import 'package:petshop/app/theme/theme.dart';
 import 'package:petshop/app/utils/loading.dart';
+import 'package:sizer/sizer.dart';
 import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -46,9 +45,8 @@ class DelonixPetshop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      minTextAdapt: true,
-      builder: (context, child) {
+    return Sizer(
+      builder: (context, orientation, deviceType) {
         return AnnotatedRegion(
           value: SystemUiOverlayStyle(
             statusBarIconBrightness: Brightness.dark,

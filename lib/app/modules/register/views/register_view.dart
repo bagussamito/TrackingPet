@@ -69,7 +69,7 @@ class RegisterView extends GetView<RegisterController> {
                         Image.asset(
                           'assets/icons/logo.png',
                           width: bodyWidth * 0.5,
-                          height: bodyHeight * 0.05,
+                          height: bodyHeight * 0.2,
                         ),
                       ],
                     ),

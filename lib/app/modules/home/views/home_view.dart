@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
@@ -15,6 +14,7 @@ import 'package:petshop/app/modules/grooming_admin/views/grooming_admin_view.dar
 import 'package:petshop/app/modules/home/controllers/home_controller.dart';
 import 'package:petshop/app/modules/setting/views/setting_view.dart';
 import 'package:petshop/app/modules/setting_admin/views/setting_admin_view.dart';
+import 'package:sizer/sizer.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/loading.dart';
 import '../../barang_user/views/barang_user_view.dart';
@@ -107,10 +107,10 @@ class HomeView extends GetView<HomeController> {
         controller.changePage(index);
       },
       child: SizedBox(
-        height: 0.08.sh,
+        height: 8.h,
         child: SizedBox(
-          width: 0.05.sw,
-          height: 0.25.sh,
+          width: 5.w,
+          height: 10.h,
           child: Obx(
             () => Icon(
               icon,

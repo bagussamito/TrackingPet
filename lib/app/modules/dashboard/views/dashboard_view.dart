@@ -132,7 +132,7 @@ class DashboardView extends GetView<DashboardController> {
                               var addres = data['lokasi hewan']['address'];
                               var name = data['name'];
                               var status = data['status'];
-                              bool isClickable = status == 'Diterima';
+                              bool isClickable = status == 'Selesai';
 
                               return Padding(
                                 padding:
@@ -144,7 +144,6 @@ class DashboardView extends GetView<DashboardController> {
                                     borderRadius: BorderRadius.circular(30),
                                     onTap: isClickable
                                         ? () {
-                                            // Tambahkan fungsi yang akan dijalankan ketika data diklik
                                             if (isClickable) {
                                               Get.toNamed(
                                                   Routes.DETAIL_GROOMING,
@@ -154,8 +153,10 @@ class DashboardView extends GetView<DashboardController> {
                                         : () {},
                                     child: SizedBox(
                                       width: bodyWidth * 1,
-                                      height: bodyHeight * 0.2,
+                                      height: bodyHeight * 0.28,
                                       child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
@@ -174,30 +175,36 @@ class DashboardView extends GetView<DashboardController> {
                                                       flex: 2,
                                                       child: Text(
                                                         "Tanggal",
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        textScaleFactor: 1,
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Purple,
-                                                        ),
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Purple),
                                                       ),
                                                     ),
                                                     Text(
                                                       ":",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 1,
                                                       style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Purple,
-                                                      ),
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple),
                                                     ),
                                                     Expanded(
                                                       flex: 3,
                                                       child: Text(
                                                         "${DateFormat('d MMMM yyyy', 'id-ID').format(DateTime.parse(data['lokasi hewan']['date']))}",
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        textScaleFactor: 1,
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Purple,
-                                                        ),
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Purple),
                                                       ),
                                                     ),
                                                   ],
@@ -208,30 +215,36 @@ class DashboardView extends GetView<DashboardController> {
                                                       flex: 2,
                                                       child: Text(
                                                         "Layanan",
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        textScaleFactor: 1,
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Purple,
-                                                        ),
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Purple),
                                                       ),
                                                     ),
                                                     Text(
                                                       ":",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 1,
                                                       style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Purple,
-                                                      ),
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple),
                                                     ),
                                                     Expanded(
                                                       flex: 3,
                                                       child: Text(
                                                         "$layanan",
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        textScaleFactor: 1,
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Purple,
-                                                        ),
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Purple),
                                                       ),
                                                     ),
                                                   ],
@@ -242,30 +255,36 @@ class DashboardView extends GetView<DashboardController> {
                                                       flex: 2,
                                                       child: Text(
                                                         "Nama Hewan",
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        textScaleFactor: 1,
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Purple,
-                                                        ),
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Purple),
                                                       ),
                                                     ),
                                                     Text(
                                                       ":",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 1,
                                                       style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Purple,
-                                                      ),
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple),
                                                     ),
                                                     Expanded(
                                                       flex: 3,
                                                       child: Text(
                                                         "$nama_hewan",
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        textScaleFactor: 1,
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Purple,
-                                                        ),
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Purple),
                                                       ),
                                                     ),
                                                   ],
@@ -276,30 +295,36 @@ class DashboardView extends GetView<DashboardController> {
                                                       flex: 2,
                                                       child: Text(
                                                         "Nama Pemesan",
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        textScaleFactor: 1,
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Purple,
-                                                        ),
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Purple),
                                                       ),
                                                     ),
                                                     Text(
                                                       ":",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 1,
                                                       style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Purple,
-                                                      ),
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple),
                                                     ),
                                                     Expanded(
                                                       flex: 3,
                                                       child: Text(
                                                         "$name",
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        textScaleFactor: 1,
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Purple,
-                                                        ),
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Purple),
                                                       ),
                                                     ),
                                                   ],
@@ -310,30 +335,36 @@ class DashboardView extends GetView<DashboardController> {
                                                       flex: 2,
                                                       child: Text(
                                                         "Status",
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        textScaleFactor: 1,
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Purple,
-                                                        ),
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Purple),
                                                       ),
                                                     ),
                                                     Text(
                                                       ":",
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      textScaleFactor: 1,
                                                       style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Purple,
-                                                      ),
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple),
                                                     ),
                                                     Expanded(
                                                       flex: 3,
                                                       child: Text(
                                                         "$status",
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        textScaleFactor: 1,
                                                         style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: Purple,
-                                                        ),
+                                                            fontWeight:
+                                                                FontWeight.w400,
+                                                            color: Purple),
                                                       ),
                                                     ),
                                                   ],
@@ -353,29 +384,33 @@ class DashboardView extends GetView<DashboardController> {
                                                   flex: 2,
                                                   child: Text(
                                                     "Lokasi Hewan",
+                                                    textAlign: TextAlign.start,
+                                                    textScaleFactor: 1,
                                                     style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Purple,
-                                                    ),
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: Purple),
                                                   ),
                                                 ),
                                                 Text(
                                                   ":",
+                                                  textAlign: TextAlign.start,
+                                                  textScaleFactor: 1,
                                                   style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Purple,
-                                                  ),
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: Purple),
                                                 ),
                                                 Expanded(
                                                   flex: 3,
                                                   child: Text(
                                                     addres,
+                                                    textAlign: TextAlign.start,
+                                                    textScaleFactor: 1,
                                                     style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Purple,
-                                                    ),
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: Purple),
                                                   ),
                                                 ),
                                               ],

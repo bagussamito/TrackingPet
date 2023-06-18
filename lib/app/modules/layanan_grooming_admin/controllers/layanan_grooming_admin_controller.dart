@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,6 +23,15 @@ class LayananGroomingAdminController extends GetxController {
   Stream<DocumentSnapshot<Map<String, dynamic>>> getUserDoc(String id) async* {
     var user = firestore.collection("Order").doc(id);
     yield* user.snapshots();
+  }
+
+  final statusC = "".obs;
+  final layananValidator = MultiValidator([
+    RequiredValidator(errorText: "Kolom harus diisi"),
+  ]);
+  void setStatus(String selesai) {
+    statusC.value = selesai;
+    log(statusC.value);
   }
 
   CollectionReference notificationsRef =
@@ -152,10 +162,11 @@ class LayananGroomingAdminController extends GetxController {
       File imageFile = previewImagestep4.value!;
       String imageUrl = await uploadImageToFirestore(imageFile);
       String textFieldValue = step3Controller.text;
+      String statusSelesai = statusC.value;
       DateTime currentTime = DateTime.now();
       String formattedTime = DateFormat('HH:mm:ss').format(currentTime);
       jamselesaiController.value = formattedTime;
-      stepData = '$textFieldValue - $formattedTime - $imageUrl';
+      stepData = '$statusSelesai - $formattedTime - $imageUrl';
 
       // Tambahkan data ke Firestore
 
@@ -164,9 +175,6 @@ class LayananGroomingAdminController extends GetxController {
         stepData: stepData,
         id: id,
       );
-
-      // Setelah konfirmasi selesai, lanjutkan ke step berikutnya
-      goToNextStep(id: id, title: title);
     }
   }
 

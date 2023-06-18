@@ -1,19 +1,9 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:petshop/app/modules/setting/views/setting_view.dart';
 import 'package:petshop/app/theme/theme.dart';
 import 'package:petshop/app/utils/loading.dart';
-import 'package:anim_search_bar/anim_search_bar.dart';
-
-import '../../../data/models/barangmodel.dart';
 import '../controllers/barang_user_controller.dart';
 
 class BarangUserView extends GetView<BarangUserController> {
@@ -61,7 +51,7 @@ class BarangUserView extends GetView<BarangUserController> {
                                   controller: controller.searchController,
                                   onChanged: (value) =>
                                       controller.searchQuery.add(value),
-                                  style: TextStyle(color: dark),
+                                  style: TextStyle(color: Purple),
                                   decoration: InputDecoration(
                                       prefixIcon: Align(
                                           widthFactor: 1.0,

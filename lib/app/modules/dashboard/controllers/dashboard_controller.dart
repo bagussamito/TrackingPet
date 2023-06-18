@@ -10,9 +10,9 @@ class DashboardController extends GetxController {
   //TODO: Implement DashboardController
   final List<String> titles = [
     'Reguler Grooming Adalah Layanan Grooming Dengan Fasilitas Potong Kuku, Membersihkan Telinga',
-    'SPA Grooming Adalah Layanan Grooming Dengan Menggunakan Shampoo Premium dan Juga Mosturaizer Yang Bisa Membuat Kucing Lebih Rileks dan Bulu Menjadi Halus',
-    'Reguler Grooming Kutu Adalah Layanan Grooming Dengan Fasilitas Potong Kuku, Membersihkan Telinga Dengan Menggunakan Shampoo Kusus Kutu',
-    'Reguler Grooming Jamur Adalah Layanan Grooming Dengan Fasilitas Potong Kuku, Membersihkan Telinga Dengan Menggunakan Shampoo Kusus Jamur',
+    'SPA Layanan Grooming Dengan Menggunakan Shampo Premium dan Juga Mosturaizer Yang Bisa Membuat Kucing Rileks dan Bulu Menjadi Halus',
+    'Reguler Grooming Kutu Adalah Layanan Grooming Dengan Fasilitas Potong Kuku, Membersihkan Telinga Menggunakan Shampo Khsus Kutu',
+    'Reguler Grooming Jamur Adalah Layanan Grooming Dengan Fasilitas Potong Kuku, Membersihkan Telinga Menggunakan Shampo Khusus Jamur',
   ];
 
   changePage(int i) {

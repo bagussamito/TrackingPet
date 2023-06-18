@@ -32,60 +32,18 @@ class DashboardAdminController extends GetxController {
     return barang.snapshots();
   }
 
-  void addBarang(String namabarang, String hargabarang) async {
-    CollectionReference barang = firestore.collection('Barang');
-    String uriImage = '';
-
-    File file = File(image!.path);
-    String ext = image!.name.split(".").last;
-
-    String uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
-    Reference referenceRoot = FirebaseStorage.instance.ref();
-    Reference referenceDirImage = referenceRoot.child('images');
-    Reference referenceImageUpload = referenceDirImage.child(uniqueFileName);
-
-    referenceImageUpload.putFile(file);
-
-    try {
-      await referenceImageUpload.putFile(file);
-      uriImage = await referenceImageUpload.getDownloadURL();
-      await barang.add({
-        "nama_barang": namabarang,
-        "harga_barang": hargabarang,
-        "foto_barang": uriImage,
-      });
-
-      Get.defaultDialog(
-        title: "Berhasil",
-        middleText: "Berhasil Memasukkan Data",
-        onConfirm: () {
-          namabarangC.clear();
-
-          hargabarangC.clear();
-          Get.back();
-        },
-        textConfirm: "Okay",
-      );
-    } catch (e) {
-      print(e);
-      Get.defaultDialog(
-        title: "Error",
-        middleText: "Tidak Berhasil Memasukkan Data",
-      );
-    }
+  Stream<QuerySnapshot<Map<String, dynamic>>> orderProses() {
+    return firestore
+        .collection("Order")
+        .where('status', isEqualTo: 'Diterima')
+        .snapshots();
   }
 
-  void pickImage() async {
-    image =
-        await picker.pickImage(source: ImageSource.gallery, imageQuality: 75);
-    if (image != null) {
-      print(image!.name);
-      print(image!.name.split(".").last);
-      print(image!.path);
-    } else {
-      print(image);
-    }
-    update();
+  Stream<QuerySnapshot<Map<String, dynamic>>> orderDone() {
+    return firestore
+        .collection("Order")
+        .where('status', isEqualTo: 'Selesai')
+        .snapshots();
   }
 
   final count = 0.obs;

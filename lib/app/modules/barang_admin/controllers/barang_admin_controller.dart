@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:firebase_storage/firebase_storage.dart' as s;
+import 'package:rxdart/rxdart.dart';
 
 class BarangAdminController extends GetxController {
   //TODO: Implement DashboardHRController
@@ -18,6 +19,10 @@ class BarangAdminController extends GetxController {
   final namabarangKey = GlobalKey<FormState>().obs;
   final hargabarangC = TextEditingController();
   final hargabarangKey = GlobalKey<FormState>().obs;
+  final namabarangBaruC = TextEditingController();
+  final namabarangBaruKey = GlobalKey<FormState>().obs;
+  final hargabarangBaruC = TextEditingController();
+  final hargabarangBaruKey = GlobalKey<FormState>().obs;
   final namabrgValidaator = MultiValidator([
     RequiredValidator(errorText: "Kolom harus diisi"),
   ]);
@@ -28,12 +33,27 @@ class BarangAdminController extends GetxController {
 
   XFile? image;
 
-  // var isPasswordHidden = true.obs;
+  late Stream<QuerySnapshot<Map<String, dynamic>>> olahSearch;
 
-  Stream<QuerySnapshot<Object?>> getBarangDoc() {
-    CollectionReference barang = firestore.collection("Barang");
+  final TextEditingController searchController = TextEditingController();
+  final BehaviorSubject<String> searchQuery = BehaviorSubject<String>();
 
-    return barang.snapshots();
+  Stream<QuerySnapshot<Map<String, dynamic>>> getBarangDoc() {
+    return searchQuery
+        .debounceTime(Duration(milliseconds: 300))
+        .switchMap((query) {
+      if (query.isEmpty) {
+        return firestore.collection("Barang").snapshots();
+      } else {
+        String lowerCaseQuery = query.toLowerCase();
+        String upperCaseQuery = query.toUpperCase();
+        return firestore
+            .collection("Barang")
+            .where("nama_barang", isGreaterThanOrEqualTo: query)
+            .where("nama_barang", isLessThanOrEqualTo: query + 'z')
+            .snapshots();
+      }
+    });
   }
 
   void addBarang(String namabarang, String hargabarang) async {
@@ -58,8 +78,7 @@ class BarangAdminController extends GetxController {
         "harga_barang": hargabarang,
         "foto_barang": uriImage,
       });
-
-      String docId = docRef.id;
+      await docRef.update({"id": docRef.id});
 
       Get.defaultDialog(
         title: "Berhasil",
@@ -81,12 +100,10 @@ class BarangAdminController extends GetxController {
     }
   }
 
-  void editBarang(String docId, String namabarang, String hargabarang) async {
+  void editBarang(String id, String namabarang, String hargabarang) async {
     CollectionReference barang = firestore.collection('Barang');
-    DocumentReference docRef = barang.doc(docId);
+    DocumentReference docRef = barang.doc(id);
     try {
-      print("Nama Barang sebelum pembaruan: $namabarang");
-
       await docRef.update({
         "nama_barang": namabarang,
         "harga_barang": hargabarang,
@@ -144,24 +161,23 @@ class BarangAdminController extends GetxController {
   }
 
   void pickImage() async {
-    if (image == null) {
-      image =
-          await picker.pickImage(source: ImageSource.gallery, imageQuality: 75);
-      if (image != null) {
-        print(image!.name);
-        print(image!.name.split(".").last);
-        print(image!.path);
-      } else {
-        print(image);
-      }
-      update();
+    image =
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 75);
+    if (image != null) {
+      print(image!.name);
+      print(image!.name.split(".").last);
+      print(image!.path);
+    } else {
+      print(image);
     }
+    update();
   }
 
   final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
+    searchQuery.add('');
   }
 
   @override
@@ -172,6 +188,8 @@ class BarangAdminController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+    searchQuery.close();
+    searchController.dispose();
   }
 
   void increment() => count.value++;

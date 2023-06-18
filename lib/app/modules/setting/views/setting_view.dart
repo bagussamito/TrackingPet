@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
@@ -653,32 +653,36 @@ class SettingView extends GetView<SettingController> {
                                                         'Nama Hewan : ${hewanData["nama_hewan"]}',
                                                         textScaleFactor: 1,
                                                         style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: Purple),
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple,
+                                                        ),
                                                       ),
                                                       SizedBox(height: 4),
                                                       Text(
                                                         'Jenis Hewan : ${hewanData["jenis_hewan"]}',
                                                         textScaleFactor: 1,
                                                         style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: Purple),
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple,
+                                                        ),
                                                       ),
                                                       SizedBox(height: 4),
                                                       Text(
                                                         'Umur Hewan : ${hewanData["umur_hewan"]}',
                                                         textScaleFactor: 1,
                                                         style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: Purple),
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple,
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
                                                 ),
                                               ),
+                                              SizedBox(width: 8),
                                               InkWell(
                                                 onTap: () {
                                                   if (docId.isNotEmpty) {
@@ -703,6 +707,7 @@ class SettingView extends GetView<SettingController> {
                               },
                             ),
                           ),
+
                           SizedBox(
                             height: bodyHeight * 0.025,
                           ),

@@ -86,7 +86,7 @@ class GroomingAdminView extends GetView<GroomingAdminController> {
                                 borderRadius: BorderRadius.circular(30),
                                 child: SizedBox(
                                   width: bodyWidth * 1,
-                                  height: bodyHeight * 0.28,
+                                  height: bodyHeight * 0.29,
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -213,18 +213,19 @@ class GroomingAdminView extends GetView<GroomingAdminController> {
                                                             await dashboardController
                                                                 .updateOrderGroomingStatus(
                                                               data['id'],
-                                                              'Diterima',
+                                                              'Sedang Diproses Admin',
                                                             );
                                                             Get.toNamed(
                                                               Routes
                                                                   .LAYANAN_GROOMING_ADMIN,
                                                               arguments: data,
                                                             );
-
+                                                            print(
+                                                                'uid user $uid');
                                                             await controller
                                                                 .sendNotificationToUser(
                                                               uid,
-                                                              'Pesanan Layanan Grooming Diterima Oleh Admin',
+                                                              'Pesanan Grooming Diterima Admin',
                                                               'Selamat Admin Sedang Memproses Layanan Anda!',
                                                             );
                                                           },

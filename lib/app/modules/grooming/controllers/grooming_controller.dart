@@ -116,7 +116,7 @@ class GroomingController extends GetxController {
     }
   }
 
-  void getLokasi(String layanan, String selectedItem) async {
+  void getLokasi(String name, String layanan, String selectedItem) async {
     Map<String, dynamic> dataResponse = await determinePosition();
     if (!dataResponse["error"]) {
       Position position = dataResponse['position'];
@@ -139,21 +139,21 @@ class GroomingController extends GetxController {
   CollectionReference notificationsRef =
       FirebaseFirestore.instance.collection('Notifications');
 
-  Future<void> sendNotificationToAdmin() async {
+  Future<void> sendNotificationToAdmin(name) async {
     String serverKey =
         'AAAA6JsekTQ:APA91bGryI4OESo9Aw6h_MnNep1wp9U4qed2MEA_suEuGeiBUwTYcgKw4RKh93upT1XlX9eUPX0KYoGy6Nurdz1Pok6Sv1nOZG8FNQhrwU_wsHEGYw3goqa_JgenBOR9BWfc0B1iil8b'; // Replace with your actual server key
     String? adminToken = await getAdminToken();
 
     String title = "Pesanan Grooming Baru";
-    String message = "Sebuah data ShareLoc baru telah ditambahkan oleh user.";
+    String message = "$name Telah Memesan Layanan Grooming";
 
-    await notificationsRef.add({
-      'title': title,
-      'message': message,
-      'read': false,
-      'timestamp': DateTime.now(),
-      'token': adminToken,
-    });
+    // await notificationsRef.add({
+    //   'title': title,
+    //   'message': message,
+    //   'read': false,
+    //   'timestamp': DateTime.now(),
+    //   'token': adminToken,
+    // });
 
     await http.post(
       Uri.parse('https://fcm.googleapis.com/fcm/send'),
@@ -214,8 +214,7 @@ class GroomingController extends GetxController {
       },
     });
     await docShareLoc.update({"id": docShareLoc.id});
-
-    await sendNotificationToAdmin();
+    await sendNotificationToAdmin(name);
     Get.dialog(Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       backgroundColor: Yellow1,

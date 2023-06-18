@@ -5,16 +5,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:iconly/iconly.dart';
-import 'package:intl/intl.dart';
-import 'package:latlong2/latlong.dart';
-import 'package:petshop/app/controllers/auth_controller.dart';
-import 'package:petshop/app/modules/home/views/home_view.dart';
-import 'package:petshop/app/routes/app_pages.dart';
 import 'package:petshop/app/utils/loading.dart';
-
 import '../../../theme/theme.dart';
-
 import '../../dashboard/controllers/dashboard_controller.dart';
 import '../../dashboard/views/dashboard_view.dart';
 import '../controllers/grooming_controller.dart';
@@ -26,7 +18,6 @@ class GroomingView extends GetView<GroomingController> {
 
   @override
   Widget build(BuildContext context) {
-    final DashboardController dashboardController = Get.find();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: light,
@@ -39,6 +30,7 @@ class GroomingView extends GetView<GroomingController> {
               }
               if (snap.hasData) {
                 Map<String, dynamic> user = snap.data!.data()!;
+                var nama = user['name'];
                 return LayoutBuilder(
                   builder: (context, constraints) {
                     final textScale = MediaQuery.of(context).textScaleFactor;
@@ -406,12 +398,10 @@ class GroomingView extends GetView<GroomingController> {
                                         child: TextButton(
                                           onPressed: () {
                                             controller.getLokasi(
+                                              nama,
                                               controller.layananC.value,
                                               controller.selectedItem.value,
                                             );
-                                            // dashboardController
-                                            //     .updateOrderProcessingStatus(
-                                            //         true);
                                           },
                                           child: Text(
                                             "Bagikan Lokasi",

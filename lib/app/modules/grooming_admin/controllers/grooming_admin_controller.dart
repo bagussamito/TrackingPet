@@ -11,10 +11,19 @@ class GroomingAdminController extends GetxController {
   DateTime? start;
   DateTime end = DateTime.now();
   String? userFCMToken;
+  var isServiceAccepted = false.obs;
+
+  Future<void> acceptService() async {
+    // Logika untuk menerima layanan
+
+    // Set nilai variabel isServiceAccepted menjadi true setelah menerima layanan
+    isServiceAccepted.value = true;
+  }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> streamDataOrder() {
     var order =
-        firestore.collection("Order").orderBy('todayDate', descending: true);
+        firestore.collection("Order").where('status', isNotEqualTo: 'Selesai');
+    // .orderBy('todayDate', descending: true);
     return order.snapshots();
   }
 
@@ -30,14 +39,14 @@ class GroomingAdminController extends GetxController {
 
     // Kirim notifikasi ke token pengguna
 
-    await notificationsRef.add({
-      'title': title,
-      'message': message,
-      'read': false,
-      'timestamp': DateTime.now(),
-      'token': userToken,
-      'uid': uid,
-    });
+    // await notificationsRef.add({
+    //   'title': title,
+    //   'message': message,
+    //   'read': false,
+    //   'timestamp': DateTime.now(),
+    //   'token': userToken,
+    //   'uid': uid,
+    // });
 
     await http.post(
       Uri.parse('https://fcm.googleapis.com/fcm/send'),
@@ -68,8 +77,9 @@ class GroomingAdminController extends GetxController {
       // String adminUid =
       //     "VwEGNfGQXlSDxXtVwkRPtsa2JeA3"; // Replace with your admin UID
       DocumentSnapshot<Map<String, dynamic>> adminSnapshot =
-          await FirebaseFirestore.instance.collection('User').doc(uid).get();
+          await FirebaseFirestore.instance.collection('Users').doc(uid).get();
       userFCMToken = adminSnapshot.data()!['fcmToken'];
+      print(userFCMToken);
     }
     return userFCMToken;
   }

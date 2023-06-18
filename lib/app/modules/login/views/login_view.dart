@@ -73,12 +73,12 @@ class LoginView extends GetView<LoginController> {
                         Image.asset(
                           'assets/icons/logo.png',
                           width: bodyWidth * 0.5,
-                          height: bodyHeight * 0.20,
+                          height: bodyHeight * 0.2,
                         ),
                       ],
                     ),
                     SizedBox(
-                      height: bodyHeight * 0.08,
+                      height: bodyHeight * 0.01,
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
