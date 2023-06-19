@@ -1,20 +1,10 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/rendering.dart';
-
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:intl/intl.dart';
-import 'package:petshop/app/modules/setting/views/setting_view.dart';
 import 'package:petshop/app/theme/theme.dart';
 import 'package:petshop/app/utils/loading.dart';
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:sizer/sizer.dart';
 
 import '../controllers/dashboard_admin_controller.dart';
@@ -35,8 +25,6 @@ class DashboardAdminView extends GetView<DashboardAdminController> {
                 return LoadingView();
               }
               if (snap.hasData) {
-                var listAllDocs = snap.data!.docs;
-
                 return SingleChildScrollView(
                     reverse: false,
                     padding: EdgeInsets.only(
@@ -90,16 +78,16 @@ class DashboardAdminView extends GetView<DashboardAdminController> {
                                         physics:
                                             NeverScrollableScrollPhysics()),
                                 tabBarProperties: TabBarProperties(
-                                    height: 10.h,
+                                    height: 7.h,
                                     indicator: ContainerTabIndicator(
                                         width: 28.w,
                                         height: 5.h,
                                         radius: BorderRadius.circular(10),
                                         color: Grey1),
                                     indicatorColor: Grey1,
-                                    indicatorWeight: 5.0,
+                                    indicatorWeight: 12,
                                     labelColor: backgroundOrange,
-                                    unselectedLabelColor: Colors.grey[400]),
+                                    unselectedLabelColor: Colors.grey[000]),
                                 views: [
                                   StreamBuilder<
                                           QuerySnapshot<Map<String, dynamic>>>(

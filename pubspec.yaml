@@ -46,7 +46,6 @@ dependencies:
   iconly: ^1.0.1
   image_picker: ^0.8.6+3
   intl: 0.18.0
-
   latlong2: ^0.8.0
   lottie: ^2.4.0
   rxdart: ^0.27.7
@@ -65,4 +64,3 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
-    - android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
