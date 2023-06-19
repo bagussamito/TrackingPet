@@ -103,97 +103,122 @@ class BarangUserView extends GetView<BarangUserController> {
                               ? Center(
                                   child: Text('TIDAK ADA DATA'),
                                 )
-                              : ListView.builder(
+                              : GridView.builder(
                                   shrinkWrap: true,
                                   padding: EdgeInsets.only(
                                       bottom: bodyHeight * 0.005,
                                       top: bodyHeight * 0.01),
                                   physics: NeverScrollableScrollPhysics(),
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount:
+                                        2, // Menentukan jumlah kolom dalam grid
+                                    crossAxisSpacing: 10, // Spasi antar kolom
+                                    mainAxisSpacing: 10, // Spasi antar baris
+                                    childAspectRatio:
+                                        0.7, // Rasio lebar-tinggi setiap item grid
+                                  ),
                                   itemCount: snap.data!.docs.length,
                                   itemBuilder: (context, index) {
                                     Map<String, dynamic> data =
                                         snap.data!.docs[index].data();
 
-                                    return Padding(
-                                      padding: EdgeInsets.only(
-                                          bottom: bodyHeight * 0.001),
-                                      child: Material(
-                                        color: Colors.transparent,
+                                    return Container(
+                                      decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
-                                        child: InkWell(
-                                          child: SizedBox(
-                                            width: bodyWidth * 1,
-                                            height: bodyHeight * 0.309,
-                                            child: Column(
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10), // Image border
-                                                  child: Container(
-                                                    width: bodyWidth * 0.46,
-                                                    height: bodyHeight * 0.22,
-                                                    // Image radius
-                                                    child: Image.network(
-                                                      data["foto_barang"],
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  data['nama_barang'],
-                                                  textAlign: TextAlign.start,
-                                                  textScaleFactor: 1,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Purple,
-                                                  ),
-                                                ),
-                                                SizedBox(
-                                                  height: bodyHeight * 0.007,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Icon(
-                                                      FontAwesomeIcons.paw,
-                                                      color: Red1,
-                                                    ),
-                                                    SizedBox(
-                                                      width: bodyWidth * 0.02,
-                                                    ),
-                                                    Text(
-                                                      "Rp : ",
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      textScaleFactor: 1,
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Purple,
+                                        border: Border.all(
+                                          color: Colors
+                                              .grey[300]!, // Warna bingkai
+                                          width: 1.0, // Lebar bingkai
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.only(
+                                            bottom: bodyHeight * 0.001),
+                                        child: Material(
+                                          color: Color(0xFFE7D8FF),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: InkWell(
+                                            child: SizedBox(
+                                              width: bodyWidth * 0.46,
+                                              height: bodyHeight * 0.309,
+                                              child: Column(
+                                                children: [
+                                                  ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10), // Image border
+                                                    child: Container(
+                                                      width: bodyWidth * 0.46,
+                                                      height: bodyHeight *
+                                                          0.22, // Image size
+                                                      // Image radius
+                                                      child: Image.network(
+                                                        data["foto_barang"],
+                                                        fit: BoxFit
+                                                            .cover, // Mengatur gambar agar sesuai dengan bingkai
                                                       ),
                                                     ),
-                                                    Text(
-                                                      data['harga_barang'],
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      textScaleFactor: 1,
-                                                      style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Purple,
-                                                      ),
+                                                  ),
+                                                  Text(
+                                                    data['nama_barang'],
+                                                    textAlign: TextAlign.start,
+                                                    textScaleFactor: 1,
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Purple,
                                                     ),
-                                                  ],
-                                                ),
-                                              ],
+                                                  ),
+                                                  SizedBox(
+                                                    height: bodyHeight * 0.007,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Icon(
+                                                        FontAwesomeIcons.paw,
+                                                        color: Red1,
+                                                      ),
+                                                      SizedBox(
+                                                        width: bodyWidth * 0.02,
+                                                      ),
+                                                      Text(
+                                                        "Rp : ",
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        textScaleFactor: 1,
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        data['harga_barang'],
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        textScaleFactor: 1,
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Purple,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
                                     );
-                                  }),
+                                  },
+                                ),
                           Padding(
                               padding: EdgeInsets.only(
                                   bottom:

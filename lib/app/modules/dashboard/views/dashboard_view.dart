@@ -1,18 +1,9 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/rendering.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:petshop/app/modules/layanan_grooming_admin/views/layanan_grooming_admin_view.dart';
 import 'package:petshop/app/theme/theme.dart';
 import 'package:petshop/app/utils/loading.dart';
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/dashboard_controller.dart';
@@ -63,8 +54,7 @@ class DashboardView extends GetView<DashboardController> {
                                   )),
                             ],
                           ),
-                          Text(
-                              "Banyak Sekali Layanan Yang Kami Berikan Kepada Anda",
+                          Text("Beberapa Layanan Yang Kami Berikan Kepada Anda",
                               textAlign: TextAlign.start,
                               textScaleFactor: 1,
                               style: TextStyle(
@@ -138,7 +128,7 @@ class DashboardView extends GetView<DashboardController> {
                                 padding:
                                     EdgeInsets.only(bottom: bodyHeight * 0.015),
                                 child: Material(
-                                  color: Grey1,
+                                  color: Color(0xFFE7D8FF),
                                   borderRadius: BorderRadius.circular(30),
                                   child: InkWell(
                                     borderRadius: BorderRadius.circular(30),

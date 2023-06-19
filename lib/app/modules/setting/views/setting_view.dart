@@ -609,7 +609,11 @@ class SettingView extends GetView<SettingController> {
                               builder: (context, snapshot) {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
-                                  return CircularProgressIndicator();
+                                  return CircularProgressIndicator(
+                                    strokeWidth: 2.0,
+                                    valueColor:
+                                        AlwaysStoppedAnimation<Color>(Purple),
+                                  );
                                 } else if (snapshot.hasError) {
                                   return Text('Error: ${snapshot.error}');
                                 } else if (snapshot.hasData) {
@@ -639,8 +643,12 @@ class SettingView extends GetView<SettingController> {
                                           child: Row(
                                             children: [
                                               Expanded(
-                                                child: SizedBox(
-                                                  height: bodyHeight * 0.09,
+                                                child: Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                    vertical: bodyHeight * 0.01,
+                                                    horizontal:
+                                                        bodyWidth * 0.03,
+                                                  ),
                                                   child: Column(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
@@ -650,7 +658,7 @@ class SettingView extends GetView<SettingController> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        'Nama Hewan : ${hewanData["nama_hewan"]}',
+                                                        'Nama Hewan: ${hewanData["nama_hewan"]}',
                                                         textScaleFactor: 1,
                                                         style: TextStyle(
                                                           fontWeight:
@@ -660,7 +668,7 @@ class SettingView extends GetView<SettingController> {
                                                       ),
                                                       SizedBox(height: 4),
                                                       Text(
-                                                        'Jenis Hewan : ${hewanData["jenis_hewan"]}',
+                                                        'Jenis Hewan: ${hewanData["jenis_hewan"]}',
                                                         textScaleFactor: 1,
                                                         style: TextStyle(
                                                           fontWeight:
@@ -670,7 +678,7 @@ class SettingView extends GetView<SettingController> {
                                                       ),
                                                       SizedBox(height: 4),
                                                       Text(
-                                                        'Umur Hewan : ${hewanData["umur_hewan"]}',
+                                                        'Umur Hewan: ${hewanData["umur_hewan"]}',
                                                         textScaleFactor: 1,
                                                         style: TextStyle(
                                                           fontWeight:
@@ -682,7 +690,6 @@ class SettingView extends GetView<SettingController> {
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(width: 8),
                                               InkWell(
                                                 onTap: () {
                                                   if (docId.isNotEmpty) {
@@ -690,9 +697,12 @@ class SettingView extends GetView<SettingController> {
                                                         .deleteHewanData(docId);
                                                   }
                                                 },
-                                                child: Icon(
-                                                  Icons.delete,
-                                                  color: Colors.red,
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(10),
+                                                  child: Icon(
+                                                    Icons.delete,
+                                                    color: Colors.red,
+                                                  ),
                                                 ),
                                               ),
                                             ],
@@ -707,7 +717,6 @@ class SettingView extends GetView<SettingController> {
                               },
                             ),
                           ),
-
                           SizedBox(
                             height: bodyHeight * 0.025,
                           ),

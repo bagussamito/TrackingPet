@@ -73,134 +73,144 @@ class GroomingView extends GetView<GroomingController> {
                                   height: bodyHeight * 0.2,
                                   color: Colors.transparent,
                                   child: StreamBuilder<QuerySnapshot<Object?>>(
-                                      stream: controller.getHewanDoc(),
-                                      builder: (context, snap) {
-                                        if (snap.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return LoadingView();
-                                        }
-                                        if (snap.hasData) {
-                                          var listAllDocs = snap.data!.docs;
-                                          return ListView.builder(
-                                              shrinkWrap: true,
-                                              padding: EdgeInsets.only(
-                                                  bottom: bodyHeight * 0.02,
-                                                  top: bodyHeight * 0.01),
-                                              itemCount: listAllDocs.length,
-                                              // itemCount: 20,
-                                              itemBuilder: (context, index) {
-                                                var hewanData =
-                                                    listAllDocs[index];
-                                                bool isSelected =
-                                                    controller.selectedItem ==
-                                                        listAllDocs[index].id;
-                                                return Padding(
-                                                  padding: EdgeInsets.all(
-                                                    bodyHeight * 0.006,
-                                                  ),
-                                                  child: Obx(
-                                                    () => Material(
-                                                      color: controller
-                                                                  .selectedItem ==
-                                                              listAllDocs[index]
-                                                                  .id
-                                                          ? Colors.grey
-                                                          : backgroundOrange,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      child: InkWell(
-                                                        onTap: () {
-                                                          print(
-                                                              "Selected item: ${(listAllDocs[index].data() as Map<String, dynamic>)["nama_hewan"]} at index $index");
-                                                          controller.selectItem(
-                                                              listAllDocs[index]
-                                                                  .id);
-                                                        },
-                                                        child: SizedBox(
-                                                          width: bodyWidth * 1,
-                                                          height: bodyHeight *
-                                                              0.071,
-                                                          child: Column(
+                                    stream: controller.getHewanDoc(),
+                                    builder: (context, snap) {
+                                      if (snap.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return LoadingView();
+                                      }
+                                      if (snap.hasData) {
+                                        var listAllDocs = snap.data!.docs;
+                                        return ListView.builder(
+                                          shrinkWrap: true,
+                                          padding: EdgeInsets.only(
+                                            bottom: bodyHeight * 0.02,
+                                            top: bodyHeight * 0.01,
+                                          ),
+                                          itemCount: listAllDocs.length,
+                                          itemBuilder: (context, index) {
+                                            var hewanData = listAllDocs[index];
+                                            bool isSelected =
+                                                controller.selectedItem ==
+                                                    listAllDocs[index].id;
+                                            return Padding(
+                                              padding: EdgeInsets.all(
+                                                  bodyHeight * 0.006),
+                                              child: Obx(
+                                                () => Material(
+                                                  color: controller
+                                                              .selectedItem ==
+                                                          listAllDocs[index].id
+                                                      ? Colors.grey
+                                                      : backgroundOrange,
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  child: InkWell(
+                                                    onTap: () {
+                                                      print(
+                                                          "Selected item: ${(listAllDocs[index].data() as Map<String, dynamic>)["nama_hewan"]} at index $index");
+                                                      controller.selectItem(
+                                                          listAllDocs[index]
+                                                              .id);
+                                                    },
+                                                    child: SizedBox(
+                                                      width: bodyWidth * 1,
+                                                      height:
+                                                          bodyHeight * 0.071,
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Row(
                                                             mainAxisAlignment:
                                                                 MainAxisAlignment
                                                                     .center,
                                                             children: [
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Text(
-                                                                    "Nama Hewan : ${hewanData["nama_hewan"]}",
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    textScaleFactor:
-                                                                        1,
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w400,
-                                                                        color:
-                                                                            Purple),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Text(
-                                                                    "Jenis Hewan : ${hewanData["jenis_hewan"]}",
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    textScaleFactor:
-                                                                        1,
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w400,
-                                                                        color:
-                                                                            Purple),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                              Row(
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Text(
-                                                                    "Umur Hewan : ${hewanData["umur_hewan"]}",
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    textScaleFactor:
-                                                                        1,
-                                                                    style: TextStyle(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w400,
-                                                                        color:
-                                                                            Purple),
-                                                                  ),
-                                                                ],
+                                                              Text(
+                                                                "Nama Hewan : ${hewanData["nama_hewan"]}",
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
+                                                                textScaleFactor:
+                                                                    1,
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color: isSelected
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Purple,
+                                                                ),
                                                               ),
                                                             ],
                                                           ),
-                                                        ),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Text(
+                                                                "Jenis Hewan : ${hewanData["jenis_hewan"]}",
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
+                                                                textScaleFactor:
+                                                                    1,
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color: isSelected
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Purple,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Text(
+                                                                "Umur Hewan : ${hewanData["umur_hewan"]}",
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .start,
+                                                                textScaleFactor:
+                                                                    1,
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color: isSelected
+                                                                      ? Colors
+                                                                          .white
+                                                                      : Purple,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
                                                   ),
-                                                );
-                                              });
-                                        } else {
-                                          return LoadingView();
-                                        }
-                                      }),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      } else {
+                                        return LoadingView();
+                                      }
+                                    },
+                                  ),
                                 ),
                                 SizedBox(
                                   height: bodyHeight * 0.005,
