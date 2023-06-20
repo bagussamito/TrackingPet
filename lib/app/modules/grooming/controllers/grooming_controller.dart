@@ -11,7 +11,6 @@ import 'package:geolocator/geolocator.dart';
 import 'package:iconly/iconly.dart';
 import 'package:intl/intl.dart';
 import 'package:petshop/app/controllers/fcm_controller.dart';
-import 'package:petshop/app/modules/detail_grooming/views/detail_grooming_view.dart';
 import 'package:petshop/app/theme/theme.dart';
 
 class GroomingController extends GetxController {

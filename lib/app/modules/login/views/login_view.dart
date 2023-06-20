@@ -1,19 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:form_field_validator/form_field_validator.dart';
-
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-
-// import 'package:petshop/app/modules/lupa_sandi/views/lupa_sandi_view.dart';
 import 'package:petshop/app/modules/register/views/register_view.dart';
 import 'package:petshop/app/theme/theme.dart';
-
 import '../../../controllers/auth_controller.dart';
-import '../../../utils/loading.dart';
-import '../../home/views/home_view.dart';
+import '../../lupa_sandi/views/lupa_sandi_view.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -166,9 +159,6 @@ class LoginView extends GetView<LoginController> {
                                   if (!currentFocus.hasPrimaryFocus) {
                                     currentFocus.unfocus();
                                   }
-
-                                  // controller.iconPass.value =
-                                  //     !controller.iconPass.value;
                                 },
                                 validator: controller.passValidator,
                                 obscureText: controller.isPasswordHidden.value,
@@ -267,18 +257,17 @@ class LoginView extends GetView<LoginController> {
                         ),
                       ),
                     ),
-
-                    // TextButton(
-                    //   onPressed: () => Get.to(LupaSandiView()),
-                    //   child: Text(
-                    //     'Lupa Kata Sandi?',
-                    //     textScaleFactor: 0.8,
-                    //     style: regular12pt.copyWith(
-                    //       color: light,
-                    //       decoration: TextDecoration.underline,
-                    //     ),
-                    //   ),
-                    // ),
+                    TextButton(
+                      onPressed: () => Get.to(LupaSandiView()),
+                      child: Text(
+                        'Lupa Kata Sandi?',
+                        textScaleFactor: 0.8,
+                        style: regular12pt.copyWith(
+                          color: light,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       height: bodyHeight * 0.2,
                     ),

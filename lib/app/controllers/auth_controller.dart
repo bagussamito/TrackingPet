@@ -2,11 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:get/get.dart';
-import 'package:petshop/app/utils/loading.dart';
-
-import '../modules/home/views/home_view.dart';
 import '../routes/app_pages.dart';
 
 class AuthController extends GetxController {

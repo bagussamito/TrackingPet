@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-import 'package:petshop/app/modules/login/views/login_view.dart';
 import 'package:petshop/app/routes/app_pages.dart';
 import 'package:petshop/app/theme/theme.dart';
 // import 'package:petshop/app/widgets/custom_icon_login_icons.dart';
@@ -72,9 +70,6 @@ class RegisterView extends GetView<RegisterController> {
                           height: bodyHeight * 0.2,
                         ),
                       ],
-                    ),
-                    SizedBox(
-                      height: bodyHeight * 0.08,
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,

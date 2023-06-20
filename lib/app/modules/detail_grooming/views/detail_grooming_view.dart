@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../theme/theme.dart';
 import '../../../utils/loading.dart';
 import '../controllers/detail_grooming_controller.dart';
@@ -16,7 +14,6 @@ class DetailGroomingView extends GetView<DetailGroomingController> {
   Widget build(BuildContext context) {
     final user = Get.arguments;
     var id = user['id'];
-    FirebaseAuth auth = FirebaseAuth.instance;
 
     // Fetch the steps data when the view is initialized
     WidgetsBinding.instance?.addPostFrameCallback((_) {
@@ -48,7 +45,17 @@ class DetailGroomingView extends GetView<DetailGroomingController> {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: bodyHeight * 0.06,
+                            height: bodyHeight * 0.04,
+                          ),
+                          Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () => Get.back(),
+                                  icon: Icon(
+                                    Icons.arrow_back,
+                                    color: dark,
+                                  ))
+                            ],
                           ),
                           Text("Data Monitoring Hewan",
                               textAlign: TextAlign.start,

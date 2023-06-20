@@ -286,7 +286,7 @@ class LayananGroomingAdminView extends GetView<LayananGroomingAdminController> {
                                                           ),
                                                           SizedBox(height: 10),
                                                           Text(
-                                                            'Dijemput Jam: ${controller.jamjemputController.value}',
+                                                            'Digrooming Jam: ${controller.jamjemputController.value}',
                                                             style: TextStyle(
                                                                 fontSize: 16),
                                                           ),
@@ -337,7 +337,7 @@ class LayananGroomingAdminView extends GetView<LayananGroomingAdminController> {
                                                               }
                                                             },
                                                             child: Text(
-                                                                'Capture Image'),
+                                                                'Ambil Gambar'),
                                                           ),
                                                           SizedBox(height: 10),
                                                           Obx(
@@ -410,7 +410,7 @@ class LayananGroomingAdminView extends GetView<LayananGroomingAdminController> {
                                                               }
                                                             },
                                                             child: Text(
-                                                                'Capture Image'),
+                                                                'Ambil Gambar'),
                                                           ),
                                                           SizedBox(height: 10),
                                                           Obx(
@@ -436,106 +436,27 @@ class LayananGroomingAdminView extends GetView<LayananGroomingAdminController> {
                                                                             .white),
                                                                   ),
                                                           ),
-                                                          DropdownSearch<
-                                                              String>(
-                                                            autoValidateMode:
-                                                                AutovalidateMode
-                                                                    .onUserInteraction,
-                                                            clearButtonProps:
-                                                                ClearButtonProps(
-                                                                    isVisible:
-                                                                        true,
-                                                                    color:
-                                                                        Purple),
-                                                            items: [
-                                                              "Selesai",
-                                                            ],
-                                                            onChanged: (value) {
-                                                              if (value !=
-                                                                  null) {
-                                                                controller
-                                                                    .setStatus(
-                                                                        value);
-                                                              }
-                                                            },
-                                                            validator: (value) {
-                                                              controller
-                                                                  .layananValidator;
-                                                            },
-                                                            dropdownDecoratorProps: DropDownDecoratorProps(
-                                                                dropdownSearchDecoration: InputDecoration(
-                                                                    hintText:
-                                                                        "Pilih Layanan",
-                                                                    hintStyle: heading6.copyWith(
-                                                                        color:
-                                                                            Grey1,
-                                                                        fontSize:
-                                                                            14 *
-                                                                                textScale),
-                                                                    border: OutlineInputBorder(
-                                                                        borderSide:
-                                                                            BorderSide.none))),
-                                                            popupProps:
-                                                                PopupProps.menu(
-                                                              constraints:
-                                                                  BoxConstraints(
-                                                                      maxHeight:
-                                                                          bodyHeight *
-                                                                              0.2),
-                                                              scrollbarProps:
-                                                                  ScrollbarProps(
-                                                                      trackVisibility:
-                                                                          true,
-                                                                      trackColor:
-                                                                          dark),
-                                                              fit:
-                                                                  FlexFit.loose,
-                                                              menuProps:
-                                                                  MenuProps(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12),
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                elevation: 0,
-                                                              ),
-                                                              containerBuilder:
-                                                                  (ctx,
-                                                                      popupWidget) {
-                                                                return Column(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .min,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .end,
-                                                                  children: [
-                                                                    Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          bottom:
-                                                                              20),
-                                                                    ),
-                                                                    Flexible(
-                                                                      child:
-                                                                          Container(
-                                                                        decoration: BoxDecoration(
-                                                                            color:
-                                                                                light,
-                                                                            boxShadow: [
-                                                                              BoxShadow(offset: Offset(0, 0.5), blurRadius: 1, color: dark.withOpacity(0.5))
-                                                                            ],
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(12)),
-                                                                        child:
-                                                                            popupWidget,
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                );
+                                                          Obx(
+                                                            () =>
+                                                                CheckboxListTile(
+                                                              title: Text(
+                                                                  "Selesai"),
+                                                              value: controller
+                                                                      .statusC
+                                                                      .value ==
+                                                                  "Selesai",
+                                                              onChanged: (bool?
+                                                                  value) {
+                                                                if (value !=
+                                                                    null) {
+                                                                  controller
+                                                                      .setStatus(
+                                                                          value);
+                                                                }
                                                               },
+                                                              controlAffinity:
+                                                                  ListTileControlAffinity
+                                                                      .leading,
                                                             ),
                                                           ),
                                                           SizedBox(height: 10),

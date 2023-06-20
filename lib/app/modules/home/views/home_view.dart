@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:iconly/iconly.dart';
 import 'package:petshop/app/controllers/auth_controller.dart';
 import 'package:petshop/app/modules/barang_admin/views/barang_admin_view.dart';
 import 'package:petshop/app/modules/dashboard/views/dashboard_view.dart';

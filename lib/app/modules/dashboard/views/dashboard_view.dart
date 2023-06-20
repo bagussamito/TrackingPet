@@ -25,7 +25,6 @@ class DashboardView extends GetView<DashboardController> {
               if (snap.hasData) {
                 return LayoutBuilder(
                   builder: (context, constraints) {
-                    final textScale = MediaQuery.of(context).textScaleFactor;
                     final bodyHeight = MediaQuery.of(context).size.height;
                     -MediaQuery.of(context).padding.top;
                     final bodyWidth = MediaQuery.of(context).size.width;
@@ -92,6 +91,9 @@ class DashboardView extends GetView<DashboardController> {
                                 controller.currentIndex.value = index;
                               },
                             ),
+                          ),
+                          SizedBox(
+                            height: bodyHeight * 0.03,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,

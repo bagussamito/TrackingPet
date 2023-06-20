@@ -1,25 +1,17 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:petshop/app/controllers/fcm_controller.dart';
-
 import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:petshop/app/modules/login/views/login_view.dart';
-import 'package:petshop/app/modules/register/views/register_view.dart';
 import 'package:petshop/app/theme/theme.dart';
 import 'package:petshop/app/utils/loading.dart';
 import 'package:sizer/sizer.dart';
-import 'package:syncfusion_localizations/syncfusion_localizations.dart';
 import 'package:page_transition/page_transition.dart';
-
 import 'app/controllers/auth_controller.dart';
-import 'app/modules/home/views/home_view.dart';
 import 'app/routes/app_pages.dart';
 import 'firebase_options.dart';
 
@@ -55,7 +47,7 @@ class DelonixPetshop extends StatelessWidget {
           ),
           child: GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            title: "GeekGarden Attendance",
+            title: "Tracking Pet",
             getPages: AppPages.routes,
             home: SplashScreen(),
             initialBinding: BindingsBuilder(() {

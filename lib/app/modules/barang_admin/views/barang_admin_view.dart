@@ -282,8 +282,7 @@ class BarangAdminView extends GetView<BarangAdminController> {
                                             key:
                                                 controller.hargabarangKey.value,
                                             child: TextFormField(
-                                              inputFormatters: <
-                                                  TextInputFormatter>[
+                                              inputFormatters: <TextInputFormatter>[
                                                 FilteringTextInputFormatter
                                                     .allow(RegExp(r'[0-9]')),
                                               ],
@@ -380,12 +379,15 @@ class BarangAdminView extends GetView<BarangAdminController> {
                                                     style: TextStyle(
                                                         color: Purple),
                                                   ),
-                                                  onPressed: () =>
-                                                      controller.addBarang(
-                                                    controller.namabarangC.text,
-                                                    controller
-                                                        .hargabarangC.text,
-                                                  ),
+                                                  onPressed: () {
+                                                    controller.addBarang(
+                                                      controller
+                                                          .namabarangC.text,
+                                                      controller
+                                                          .hargabarangC.text,
+                                                    );
+                                                    Get.back();
+                                                  },
                                                 ),
                                               ),
                                               SizedBox(
@@ -648,8 +650,7 @@ class BarangAdminView extends GetView<BarangAdminController> {
                                                                           .value,
                                                                       child:
                                                                           TextFormField(
-                                                                        inputFormatters: <
-                                                                            TextInputFormatter>[
+                                                                        inputFormatters: <TextInputFormatter>[
                                                                           FilteringTextInputFormatter.allow(
                                                                               RegExp(r'[0-9]')),
                                                                         ],

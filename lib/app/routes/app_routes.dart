@@ -18,6 +18,8 @@ abstract class Routes {
   static const DETAIL_GROOMING = _Paths.DETAIL_GROOMING;
   static const LAYANAN_GROOMING_ADMIN = _Paths.LAYANAN_GROOMING_ADMIN;
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
+  static const LUPA_SANDI = _Paths.LUPA_SANDI;
+  static const EDIT_EMAILPASS = _Paths.EDIT_EMAILPASS;
 }
 
 abstract class _Paths {
@@ -37,4 +39,6 @@ abstract class _Paths {
   static const DETAIL_GROOMING = '/detail-grooming';
   static const LAYANAN_GROOMING_ADMIN = '/layanan-grooming-admin';
   static const EDIT_PROFILE = '/edit-profile';
+  static const LUPA_SANDI = '/lupa-sandi';
+  static const EDIT_EMAILPASS = '/edit-emailpass';
 }

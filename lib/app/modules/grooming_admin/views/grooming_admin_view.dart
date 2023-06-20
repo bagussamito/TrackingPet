@@ -1,12 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:focused_menu/focused_menu.dart';
-import 'package:focused_menu/modals.dart';
-
 import 'package:get/get.dart';
-import 'package:iconly/iconly.dart';
 import 'package:intl/intl.dart';
-
 import '../../../routes/app_pages.dart';
 import '../../../theme/theme.dart';
 import '../../../utils/loading.dart';

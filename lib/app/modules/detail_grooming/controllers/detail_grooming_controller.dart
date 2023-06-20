@@ -1,13 +1,6 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
-import '../../dashboard/controllers/dashboard_controller.dart';
 
 class DetailGroomingController extends GetxController {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;

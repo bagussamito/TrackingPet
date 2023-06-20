@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:petshop/app/modules/grooming/views/grooming_view.dart';
 
 class FCMController extends GetxController {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;

@@ -19,7 +19,6 @@ class SettingView extends GetView<SettingController> {
   SettingView({Key? key}) : super(key: key);
   final SettingController controller = Get.put(SettingController());
   @override
-  bool get wantKeepAlive => true;
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -39,7 +38,6 @@ class SettingView extends GetView<SettingController> {
                   "https://ui-avatars.com/api/?name=${nama}&background=fff38a&color=5175c0&font-size=0.33";
               return LayoutBuilder(
                 builder: (context, constraints) {
-                  final textScale = MediaQuery.of(context).textScaleFactor;
                   final mediaQueryHeight = MediaQuery.of(context).size.height;
                   final bodyHeight =
                       mediaQueryHeight - MediaQuery.of(context).padding.top;
@@ -174,7 +172,9 @@ class SettingView extends GetView<SettingController> {
                                 child: Material(
                                   color: Colors.transparent,
                                   child: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () => Get.toNamed(
+                                        Routes.EDIT_EMAILPASS,
+                                        arguments: snap.data!.data()),
                                     icon: Icon(
                                       IconlyLight.edit,
                                       color: Red1,
@@ -325,8 +325,9 @@ class SettingView extends GetView<SettingController> {
                                                         prefixIcon: Align(
                                                             widthFactor: 1.0,
                                                             heightFactor: 1.0,
-                                                            child: Icon(
-                                                              Icons.input_sharp,
+                                                            child: FaIcon(
+                                                              FontAwesomeIcons
+                                                                  .newspaper,
                                                               color: Red1,
                                                             )),
                                                         hintText: 'Nama Hewan',
@@ -399,8 +400,9 @@ class SettingView extends GetView<SettingController> {
                                                         prefixIcon: Align(
                                                             widthFactor: 1.0,
                                                             heightFactor: 1.0,
-                                                            child: Icon(
-                                                              Icons.input_sharp,
+                                                            child: FaIcon(
+                                                              FontAwesomeIcons
+                                                                  .cat,
                                                               color: Red1,
                                                             )),
                                                         hintText: 'Jenis Hewan',
@@ -475,7 +477,7 @@ class SettingView extends GetView<SettingController> {
                                                             heightFactor: 1.0,
                                                             child: FaIcon(
                                                               FontAwesomeIcons
-                                                                  .moneyBill1,
+                                                                  .listNumeric,
                                                               color: Red1,
                                                             )),
                                                         hintText: 'Umur Hewan',

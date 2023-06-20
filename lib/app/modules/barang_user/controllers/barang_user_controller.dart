@@ -6,8 +6,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../data/models/barangmodel.dart';
-
 class BarangUserController extends GetxController {
   //TODO: Implement DashboardController
 

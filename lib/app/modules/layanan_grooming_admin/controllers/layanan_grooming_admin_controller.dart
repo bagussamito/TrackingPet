@@ -12,8 +12,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
-import '../../grooming/controllers/grooming_controller.dart';
-
 class LayananGroomingAdminController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -26,11 +24,13 @@ class LayananGroomingAdminController extends GetxController {
   }
 
   final statusC = "".obs;
-  final layananValidator = MultiValidator([
-    RequiredValidator(errorText: "Kolom harus diisi"),
-  ]);
-  void setStatus(String selesai) {
-    statusC.value = selesai;
+
+  void setStatus(bool isChecked) {
+    if (isChecked) {
+      statusC.value = "Selesai";
+    } else {
+      statusC.value = "";
+    }
     log(statusC.value);
   }
 

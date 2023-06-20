@@ -1,17 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:focused_menu/focused_menu.dart';
-import 'package:focused_menu/modals.dart';
-
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-import 'package:petshop/app/routes/app_pages.dart';
-
 import '../../../theme/theme.dart';
 import '../../../utils/loading.dart';
 import '../controllers/edit_profile_controller.dart';
@@ -177,8 +170,8 @@ class EditProfileView extends GetView<EditProfileController> {
                                           BorderSide(color: error, width: 1.8),
                                       borderRadius: BorderRadius.circular(12)),
                                   focusedBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Blue1, width: 1.8),
+                                      borderSide: BorderSide(
+                                          color: Yellow1, width: 1.8),
                                       borderRadius: BorderRadius.circular(12)),
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
@@ -231,8 +224,8 @@ class EditProfileView extends GetView<EditProfileController> {
                                           BorderSide(color: error, width: 1.8),
                                       borderRadius: BorderRadius.circular(12)),
                                   focusedBorder: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Blue1, width: 1.8),
+                                      borderSide: BorderSide(
+                                          color: Yellow1, width: 1.8),
                                       borderRadius: BorderRadius.circular(12)),
                                   border: OutlineInputBorder(
                                       borderSide: BorderSide.none,
