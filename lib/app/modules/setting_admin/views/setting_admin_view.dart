@@ -37,7 +37,7 @@ class SettingAdminView extends GetView<SettingAdminController> {
               }
               if (snap.hasData) {
                 var nama = snap.data!.get("name");
-                var role = snap.data!.get("role");
+                var alamat = snap.data!.get("alamat");
                 var email = snap.data!.get("email");
                 var pass = snap.data!.get("password");
                 var defaultImage =
@@ -119,6 +119,15 @@ class SettingAdminView extends GetView<SettingAdminController> {
                                           ),
                                           SizedBox(
                                             height: bodyHeight * 0.01,
+                                          ),
+                                          AutoSizeText(
+                                            "$alamat",
+                                            textAlign: TextAlign.start,
+                                            textScaleFactor: 1.2,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: regular12pt.copyWith(
+                                                color: Purple,
+                                                fontWeight: FontWeight.w400),
                                           ),
                                         ],
                                       ),

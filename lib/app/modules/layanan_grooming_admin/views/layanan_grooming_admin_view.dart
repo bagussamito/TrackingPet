@@ -130,362 +130,340 @@ class LayananGroomingAdminView extends GetView<LayananGroomingAdminController> {
                             borderRadius: BorderRadius.circular(30),
                             child: InkWell(
                               borderRadius: BorderRadius.circular(30),
-                              child: Flexible(
-                                child: SizedBox(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        height: bodyHeight * 0.01,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                          right: bodyWidth * 0.06,
-                                          left: bodyWidth * 0.06,
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "Lokasi Hewan",
-                                              textAlign: TextAlign.start,
-                                              textScaleFactor: 0.9,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                            Text(
-                                              "$addres",
-                                              textAlign: TextAlign.start,
-                                              textScaleFactor: 0.9,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: bodyHeight * 0.01,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                          right: bodyWidth * 0.06,
-                                          left: bodyWidth * 0.06,
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              "Nama Hewan",
-                                              textAlign: TextAlign.start,
-                                              textScaleFactor: 0.9,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: bodyWidth * 0.157,
-                                            ),
-                                            Text(
-                                              "$nama_hewan",
-                                              textAlign: TextAlign.start,
-                                              textScaleFactor: 0.9,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: bodyHeight * 0.01,
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                          right: bodyWidth * 0.06,
-                                          left: bodyWidth * 0.06,
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              "Layanan",
-                                              textAlign: TextAlign.start,
-                                              textScaleFactor: 0.9,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: bodyWidth * 0.228,
-                                            ),
-                                            Text(
-                                              "$layanan",
-                                              textAlign: TextAlign.start,
-                                              textScaleFactor: 0.9,
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Column(
-                                        children: [
-                                          Obx(
-                                            () => SingleChildScrollView(
-                                              child: Stepper(
-                                                onStepTapped: (step) =>
-                                                    controller.currentStep
-                                                        .value = step,
-                                                physics:
-                                                    const ClampingScrollPhysics(),
-                                                currentStep: controller
-                                                    .currentStep.value,
-                                                onStepContinue: () async {
-                                                  if (controller
-                                                          .currentStep.value ==
-                                                      2) {
-                                                    // Jika current step adalah step 3, lakukan aksi Confirm
-                                                    // Misalnya, panggil fungsi confirmStep3()
-                                                    controller.confirmStep3(
-                                                      id: id, // Ganti dengan UID yang sesuai
-                                                      title: nama_hewan,
-                                                    );
-                                                    await dashboardController
-                                                        .updateOrderGroomingStatus(
-                                                      datas['id'],
-                                                      'Selesai',
-                                                    );
-                                                    controller.statusC.value;
-                                                  } else {
-                                                    // Jika current step bukan step 3, lanjutkan ke step berikutnya
-                                                    controller.goToNextStep(
-                                                      id: id, // Ganti dengan UID yang sesuai
-                                                      title: nama_hewan,
-                                                    );
-                                                  }
-                                                },
-                                                onStepCancel:
-                                                    controller.goToPreviousStep,
-                                                steps: [
-                                                  Step(
-                                                      title: Text(
-                                                          'Jam Penjemputan Hewan'),
-                                                      content: Column(
-                                                        children: [
-                                                          Text(
-                                                            'Berat Hewan',
-                                                            style: TextStyle(
-                                                                fontSize: 16),
-                                                          ),
-                                                          TextFormField(
-                                                            controller:
-                                                                controller
-                                                                    .kondisihwnC,
-                                                          ),
-                                                          SizedBox(height: 10),
-                                                          Text(
-                                                            'Digrooming Jam: ${controller.jamjemputController.value}',
-                                                            style: TextStyle(
-                                                                fontSize: 16),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      isActive: controller
-                                                              .currentStep
-                                                              .value >=
-                                                          0,
-                                                      state: controller
-                                                                  .currentStep
-                                                                  .value >=
-                                                              0
-                                                          ? StepState.complete
-                                                          : StepState.disabled),
-                                                  Step(
-                                                      title: Text(
-                                                          'Foto Hewan Sedang Di Grooming'),
-                                                      content: Column(
-                                                        children: [
-                                                          ElevatedButton(
-                                                            onPressed:
-                                                                () async {
-                                                              final imagePicker =
-                                                                  ImagePicker();
-                                                              final pickedImage =
-                                                                  await imagePicker
-                                                                      .pickImage(
-                                                                          source:
-                                                                              ImageSource.camera);
-                                                              if (pickedImage !=
-                                                                  null) {
-                                                                // Upload the image to Firestore
-                                                                File imageFile =
-                                                                    File(pickedImage
-                                                                        .path);
-                                                                controller
-                                                                        .step2Controller
-                                                                        .text =
-                                                                    pickedImage
-                                                                        .path;
-
-                                                                // Update the preview image
-                                                                controller
-                                                                        .previewImagestep2
-                                                                        .value =
-                                                                    imageFile;
-                                                              }
-                                                            },
-                                                            child: Text(
-                                                                'Ambil Gambar'),
-                                                          ),
-                                                          SizedBox(height: 10),
-                                                          Obx(
-                                                            () => controller
-                                                                        .previewImagestep2
-                                                                        .value !=
-                                                                    null
-                                                                ? Image.file(
-                                                                    controller
-                                                                        .previewImagestep2
-                                                                        .value!)
-                                                                : Container(
-                                                                    height: 100,
-                                                                    width: 100,
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    child: Icon(
-                                                                        Icons
-                                                                            .image,
-                                                                        size:
-                                                                            50,
-                                                                        color: Colors
-                                                                            .white),
-                                                                  ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      isActive: controller
-                                                              .currentStep
-                                                              .value >=
-                                                          1,
-                                                      state: controller
-                                                                  .currentStep
-                                                                  .value >=
-                                                              1
-                                                          ? StepState.complete
-                                                          : StepState.disabled),
-                                                  Step(
-                                                      title: Text(
-                                                          'Hewan Selesai Digrooming'),
-                                                      content: Column(
-                                                        children: [
-                                                          ElevatedButton(
-                                                            onPressed:
-                                                                () async {
-                                                              final imagePicker =
-                                                                  ImagePicker();
-                                                              final pickedImage =
-                                                                  await imagePicker
-                                                                      .pickImage(
-                                                                          source:
-                                                                              ImageSource.camera);
-                                                              if (pickedImage !=
-                                                                  null) {
-                                                                // Upload the image to Firestore
-                                                                File imageFile =
-                                                                    File(pickedImage
-                                                                        .path);
-                                                                controller
-                                                                        .step4Controller
-                                                                        .text =
-                                                                    pickedImage
-                                                                        .path;
-
-                                                                // Update the preview image
-                                                                controller
-                                                                        .previewImagestep4
-                                                                        .value =
-                                                                    imageFile;
-                                                              }
-                                                            },
-                                                            child: Text(
-                                                                'Ambil Gambar'),
-                                                          ),
-                                                          SizedBox(height: 10),
-                                                          Obx(
-                                                            () => controller
-                                                                        .previewImagestep4
-                                                                        .value !=
-                                                                    null
-                                                                ? Image.file(
-                                                                    controller
-                                                                        .previewImagestep4
-                                                                        .value!)
-                                                                : Container(
-                                                                    height: 100,
-                                                                    width: 100,
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    child: Icon(
-                                                                        Icons
-                                                                            .image,
-                                                                        size:
-                                                                            50,
-                                                                        color: Colors
-                                                                            .white),
-                                                                  ),
-                                                          ),
-                                                          Obx(
-                                                            () =>
-                                                                CheckboxListTile(
-                                                              title: Text(
-                                                                  "Selesai"),
-                                                              value: controller
-                                                                      .statusC
-                                                                      .value ==
-                                                                  "Selesai",
-                                                              onChanged: (bool?
-                                                                  value) {
-                                                                if (value !=
-                                                                    null) {
-                                                                  controller
-                                                                      .setStatus(
-                                                                          value);
-                                                                }
-                                                              },
-                                                              controlAffinity:
-                                                                  ListTileControlAffinity
-                                                                      .leading,
-                                                            ),
-                                                          ),
-                                                          SizedBox(height: 10),
-                                                          Text(
-                                                            'Selesai Jam: ${controller.jamselesaiController.value}',
-                                                            style: TextStyle(
-                                                                fontSize: 16),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      isActive: controller
-                                                              .currentStep
-                                                              .value >=
-                                                          2,
-                                                      state: controller
-                                                                  .currentStep
-                                                                  .value >=
-                                                              2
-                                                          ? StepState.complete
-                                                          : StepState.disabled),
-                                                ],
-                                              ),
-                                            ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    height: bodyHeight * 0.01,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      right: bodyWidth * 0.06,
+                                      left: bodyWidth * 0.06,
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Lokasi Hewan",
+                                          textAlign: TextAlign.start,
+                                          textScaleFactor: 0.9,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
                                           ),
-                                        ],
+                                        ),
+                                        Text(
+                                          "$addres",
+                                          textAlign: TextAlign.start,
+                                          textScaleFactor: 0.9,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: bodyHeight * 0.01,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      right: bodyWidth * 0.06,
+                                      left: bodyWidth * 0.06,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Nama Hewan",
+                                          textAlign: TextAlign.start,
+                                          textScaleFactor: 0.9,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: bodyWidth * 0.157,
+                                        ),
+                                        Text(
+                                          "$nama_hewan",
+                                          textAlign: TextAlign.start,
+                                          textScaleFactor: 0.9,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: bodyHeight * 0.01,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      right: bodyWidth * 0.06,
+                                      left: bodyWidth * 0.06,
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          "Layanan",
+                                          textAlign: TextAlign.start,
+                                          textScaleFactor: 0.9,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: bodyWidth * 0.228,
+                                        ),
+                                        Text(
+                                          "$layanan",
+                                          textAlign: TextAlign.start,
+                                          textScaleFactor: 0.9,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Column(
+                                    children: [
+                                      Obx(
+                                        () => SingleChildScrollView(
+                                          child: Stepper(
+                                            onStepTapped: (step) => controller
+                                                .currentStep.value = step,
+                                            physics:
+                                                const ClampingScrollPhysics(),
+                                            currentStep:
+                                                controller.currentStep.value,
+                                            onStepContinue: () async {
+                                              if (controller
+                                                      .currentStep.value ==
+                                                  2) {
+                                                // Jika current step adalah step 3, lakukan aksi Confirm
+                                                // Misalnya, panggil fungsi confirmStep3()
+                                                controller.confirmStep3(
+                                                  id: id, // Ganti dengan UID yang sesuai
+                                                  title: nama_hewan,
+                                                );
+                                                await dashboardController
+                                                    .updateOrderGroomingStatus(
+                                                  datas['id'],
+                                                  'Selesai',
+                                                );
+                                                controller.statusC.value;
+                                              } else {
+                                                // Jika current step bukan step 3, lanjutkan ke step berikutnya
+                                                controller.goToNextStep(
+                                                  id: id, // Ganti dengan UID yang sesuai
+                                                  title: nama_hewan,
+                                                );
+                                              }
+                                            },
+                                            onStepCancel:
+                                                controller.goToPreviousStep,
+                                            steps: [
+                                              Step(
+                                                title:
+                                                    Text('Jam Grooming Hewan'),
+                                                content: Column(
+                                                  children: [
+                                                    Text(
+                                                      'Berat Hewan',
+                                                      style: TextStyle(
+                                                          fontSize: 16),
+                                                    ),
+                                                    TextFormField(
+                                                      controller: controller
+                                                          .kondisihwnC,
+                                                    ),
+                                                    SizedBox(height: 10),
+                                                    Text(
+                                                      'Digrooming Jam: ${controller.jamjemputController.value}',
+                                                      style: TextStyle(
+                                                          fontSize: 16),
+                                                    ),
+                                                  ],
+                                                ),
+                                                isActive: controller
+                                                        .currentStep.value >=
+                                                    0,
+                                                state: controller.currentStep
+                                                            .value >=
+                                                        0
+                                                    ? StepState.complete
+                                                    : StepState.disabled,
+                                              ),
+                                              Step(
+                                                title: Text(
+                                                    'Foto Hewan Sedang Di Grooming'),
+                                                content: Column(
+                                                  children: [
+                                                    ElevatedButton(
+                                                      onPressed: () async {
+                                                        final imagePicker =
+                                                            ImagePicker();
+                                                        final pickedImage =
+                                                            await imagePicker
+                                                                .pickImage(
+                                                          source: ImageSource
+                                                              .camera,
+                                                        );
+                                                        if (pickedImage !=
+                                                            null) {
+                                                          // Upload the image to Firestore
+                                                          File imageFile = File(
+                                                              pickedImage.path);
+                                                          controller
+                                                                  .step2Controller
+                                                                  .text =
+                                                              pickedImage.path;
+
+                                                          // Update the preview image
+                                                          controller
+                                                              .previewImagestep2
+                                                              .value = imageFile;
+                                                        }
+                                                      },
+                                                      child:
+                                                          Text('Ambil Gambar'),
+                                                    ),
+                                                    SizedBox(height: 10),
+                                                    Obx(
+                                                      () => controller
+                                                                  .previewImagestep2
+                                                                  .value !=
+                                                              null
+                                                          ? Image.file(controller
+                                                              .previewImagestep2
+                                                              .value!)
+                                                          : Container(
+                                                              height: 100,
+                                                              width: 100,
+                                                              color:
+                                                                  Colors.grey,
+                                                              child: Icon(
+                                                                Icons.image,
+                                                                size: 50,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                isActive: controller
+                                                        .currentStep.value >=
+                                                    1,
+                                                state: controller.currentStep
+                                                            .value >=
+                                                        1
+                                                    ? StepState.complete
+                                                    : StepState.disabled,
+                                              ),
+                                              Step(
+                                                title: Text(
+                                                    'Hewan Selesai Digrooming'),
+                                                content: Column(
+                                                  children: [
+                                                    ElevatedButton(
+                                                      onPressed: () async {
+                                                        final imagePicker =
+                                                            ImagePicker();
+                                                        final pickedImage =
+                                                            await imagePicker
+                                                                .pickImage(
+                                                          source: ImageSource
+                                                              .camera,
+                                                        );
+                                                        if (pickedImage !=
+                                                            null) {
+                                                          // Upload the image to Firestore
+                                                          File imageFile = File(
+                                                              pickedImage.path);
+                                                          controller
+                                                                  .step4Controller
+                                                                  .text =
+                                                              pickedImage.path;
+
+                                                          // Update the preview image
+                                                          controller
+                                                              .previewImagestep4
+                                                              .value = imageFile;
+                                                        }
+                                                      },
+                                                      child:
+                                                          Text('Ambil Gambar'),
+                                                    ),
+                                                    SizedBox(height: 10),
+                                                    Obx(
+                                                      () => controller
+                                                                  .previewImagestep4
+                                                                  .value !=
+                                                              null
+                                                          ? Image.file(controller
+                                                              .previewImagestep4
+                                                              .value!)
+                                                          : Container(
+                                                              height: 100,
+                                                              width: 100,
+                                                              color:
+                                                                  Colors.grey,
+                                                              child: Icon(
+                                                                Icons.image,
+                                                                size: 50,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                    ),
+                                                    Obx(
+                                                      () => CheckboxListTile(
+                                                        title: Text("Selesai"),
+                                                        value: controller
+                                                                .statusC
+                                                                .value ==
+                                                            "Selesai",
+                                                        onChanged:
+                                                            (bool? value) {
+                                                          if (value != null) {
+                                                            controller
+                                                                .setStatus(
+                                                                    value);
+                                                          }
+                                                        },
+                                                        controlAffinity:
+                                                            ListTileControlAffinity
+                                                                .leading,
+                                                      ),
+                                                    ),
+                                                    SizedBox(height: 10),
+                                                    Text(
+                                                      'Selesai Jam: ${controller.jamselesaiController.value}',
+                                                      style: TextStyle(
+                                                          fontSize: 16),
+                                                    ),
+                                                  ],
+                                                ),
+                                                isActive: controller
+                                                        .currentStep.value >=
+                                                    2,
+                                                state: controller.currentStep
+                                                            .value >=
+                                                        2
+                                                    ? StepState.complete
+                                                    : StepState.disabled,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
-                                ),
+                                ],
                               ),
                             ),
                           ),

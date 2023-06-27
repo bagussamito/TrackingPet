@@ -23,6 +23,7 @@ class DashboardView extends GetView<DashboardController> {
                 return LoadingView();
               }
               if (snap.hasData) {
+                var listAllDocs = snap.data!.docs;
                 return LayoutBuilder(
                   builder: (context, constraints) {
                     final bodyHeight = MediaQuery.of(context).size.height;
@@ -93,7 +94,7 @@ class DashboardView extends GetView<DashboardController> {
                             ),
                           ),
                           SizedBox(
-                            height: bodyHeight * 0.03,
+                            height: bodyHeight * 0.01,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -111,102 +112,346 @@ class DashboardView extends GetView<DashboardController> {
                           SizedBox(
                             height: bodyHeight * 0.01,
                           ),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            padding: EdgeInsets.only(bottom: bodyHeight * 0.02),
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: snap.data!.docs.length,
-                            itemBuilder: (context, index) {
-                              Map<String, dynamic> data =
-                                  snap.data!.docs[index].data();
-                              var layanan = data['layanan'];
-                              var nama_hewan = data['selected item'];
-                              var addres = data['lokasi hewan']['address'];
-                              var name = data['name'];
-                              var status = data['status'];
-                              bool isClickable = status == 'Selesai';
+                          listAllDocs.length == 0
+                              ? Center(
+                                  child: Text(
+                                    'Tidak Ada Data Pesanan',
+                                    textAlign: TextAlign.start,
+                                    textScaleFactor: 1,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      color: Purple,
+                                    ),
+                                  ),
+                                )
+                              : ListView.builder(
+                                  shrinkWrap: true,
+                                  padding: EdgeInsets.only(
+                                      bottom: bodyHeight * 0.02),
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: snap.data!.docs.length,
+                                  itemBuilder: (context, index) {
+                                    Map<String, dynamic> data =
+                                        snap.data!.docs[index].data();
+                                    var layanan = data['layanan'];
+                                    var nama_hewan = data['selected item'];
+                                    var addres =
+                                        data['lokasi hewan']['address'];
+                                    var name = data['name'];
+                                    var status = data['status'];
+                                    bool isClickable = status == 'Selesai';
 
-                              return Padding(
-                                padding:
-                                    EdgeInsets.only(bottom: bodyHeight * 0.015),
-                                child: Material(
-                                  color: Color(0xFFE7D8FF),
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: InkWell(
-                                    borderRadius: BorderRadius.circular(30),
-                                    onTap: isClickable
-                                        ? () {
-                                            if (isClickable) {
-                                              Get.toNamed(
-                                                  Routes.DETAIL_GROOMING,
-                                                  arguments: data);
-                                            }
-                                          }
-                                        : () {},
-                                    child: SizedBox(
-                                      width: bodyWidth * 1,
-                                      height: bodyHeight * 0.28,
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: bodyWidth * 0.06,
-                                              vertical: bodyHeight * 0.02,
-                                            ),
+                                    return Padding(
+                                      padding: EdgeInsets.only(
+                                          bottom: bodyHeight * 0.015),
+                                      child: Material(
+                                        color: Color(0xFFE7D8FF),
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: InkWell(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          onTap: isClickable
+                                              ? () {
+                                                  if (isClickable) {
+                                                    Get.toNamed(
+                                                        Routes.DETAIL_GROOMING,
+                                                        arguments: data);
+                                                  }
+                                                }
+                                              : () {},
+                                          child: SizedBox(
+                                            width: bodyWidth * 1,
+                                            height: bodyHeight * 0.28,
                                             child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Row(
-                                                  children: [
-                                                    Expanded(
-                                                      flex: 2,
-                                                      child: Text(
-                                                        "Tanggal",
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        textScaleFactor: 1,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: Purple),
+                                                Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal:
+                                                        bodyWidth * 0.06,
+                                                    vertical: bodyHeight * 0.02,
+                                                  ),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 2,
+                                                            child: Text(
+                                                              "Tanggal",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              textScaleFactor:
+                                                                  1,
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      Purple),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            ":",
+                                                            textAlign:
+                                                                TextAlign.start,
+                                                            textScaleFactor: 1,
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Purple),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 3,
+                                                            child: Text(
+                                                              "${DateFormat('d MMMM yyyy', 'id-ID').format(DateTime.parse(data['lokasi hewan']['date']))}",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              textScaleFactor:
+                                                                  1,
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      Purple),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ),
-                                                    Text(
-                                                      ":",
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      textScaleFactor: 1,
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: Purple),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 3,
-                                                      child: Text(
-                                                        "${DateFormat('d MMMM yyyy', 'id-ID').format(DateTime.parse(data['lokasi hewan']['date']))}",
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        textScaleFactor: 1,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: Purple),
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 2,
+                                                            child: Text(
+                                                              "Layanan",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              textScaleFactor:
+                                                                  1,
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      Purple),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            ":",
+                                                            textAlign:
+                                                                TextAlign.start,
+                                                            textScaleFactor: 1,
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Purple),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 3,
+                                                            child: Text(
+                                                              "$layanan",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              textScaleFactor:
+                                                                  1,
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      Purple),
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
-                                                    ),
-                                                  ],
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 2,
+                                                            child: Text(
+                                                              "Nama Hewan",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              textScaleFactor:
+                                                                  1,
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      Purple),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            ":",
+                                                            textAlign:
+                                                                TextAlign.start,
+                                                            textScaleFactor: 1,
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Purple),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 3,
+                                                            child: Text(
+                                                              "$nama_hewan",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              textScaleFactor:
+                                                                  1,
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      Purple),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 2,
+                                                            child: Text(
+                                                              "Nama Pemesan",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              textScaleFactor:
+                                                                  1,
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      Purple),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            ":",
+                                                            textAlign:
+                                                                TextAlign.start,
+                                                            textScaleFactor: 1,
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Purple),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 3,
+                                                            child: Text(
+                                                              "$name",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              textScaleFactor:
+                                                                  1,
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      Purple),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          Expanded(
+                                                            flex: 2,
+                                                            child: Text(
+                                                              "Status",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              textScaleFactor:
+                                                                  1,
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      Purple),
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            ":",
+                                                            textAlign:
+                                                                TextAlign.start,
+                                                            textScaleFactor: 1,
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                                color: Purple),
+                                                          ),
+                                                          Expanded(
+                                                            flex: 3,
+                                                            child: Text(
+                                                              "$status",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              textScaleFactor:
+                                                                  1,
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w400,
+                                                                  color:
+                                                                      Purple),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                Row(
-                                                  children: [
-                                                    Expanded(
-                                                      flex: 2,
-                                                      child: Text(
-                                                        "Layanan",
+                                                Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal:
+                                                          bodyWidth * 0.06),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Expanded(
+                                                        flex: 2,
+                                                        child: Text(
+                                                          "Lokasi Hewan",
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                          textScaleFactor: 1,
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              color: Purple),
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        ":",
                                                         textAlign:
                                                             TextAlign.start,
                                                         textScaleFactor: 1,
@@ -215,207 +460,31 @@ class DashboardView extends GetView<DashboardController> {
                                                                 FontWeight.w400,
                                                             color: Purple),
                                                       ),
-                                                    ),
-                                                    Text(
-                                                      ":",
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      textScaleFactor: 1,
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: Purple),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 3,
-                                                      child: Text(
-                                                        "$layanan",
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        textScaleFactor: 1,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: Purple),
+                                                      Expanded(
+                                                        flex: 3,
+                                                        child: Text(
+                                                          addres,
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                          textScaleFactor: 1,
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                              color: Purple),
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Expanded(
-                                                      flex: 2,
-                                                      child: Text(
-                                                        "Nama Hewan",
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        textScaleFactor: 1,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: Purple),
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      ":",
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      textScaleFactor: 1,
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: Purple),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 3,
-                                                      child: Text(
-                                                        "$nama_hewan",
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        textScaleFactor: 1,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: Purple),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Expanded(
-                                                      flex: 2,
-                                                      child: Text(
-                                                        "Nama Pemesan",
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        textScaleFactor: 1,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: Purple),
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      ":",
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      textScaleFactor: 1,
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: Purple),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 3,
-                                                      child: Text(
-                                                        "$name",
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        textScaleFactor: 1,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: Purple),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Expanded(
-                                                      flex: 2,
-                                                      child: Text(
-                                                        "Status",
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        textScaleFactor: 1,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: Purple),
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      ":",
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      textScaleFactor: 1,
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: Purple),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 3,
-                                                      child: Text(
-                                                        "$status",
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        textScaleFactor: 1,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: Purple),
-                                                      ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
                                           ),
-                                          Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                horizontal: bodyWidth * 0.06),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: Text(
-                                                    "Lokasi Hewan",
-                                                    textAlign: TextAlign.start,
-                                                    textScaleFactor: 1,
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Purple),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  ":",
-                                                  textAlign: TextAlign.start,
-                                                  textScaleFactor: 1,
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      color: Purple),
-                                                ),
-                                                Expanded(
-                                                  flex: 3,
-                                                  child: Text(
-                                                    addres,
-                                                    textAlign: TextAlign.start,
-                                                    textScaleFactor: 1,
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: Purple),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
+                                        ),
                                       ),
-                                    ),
-                                  ),
+                                    );
+                                  },
                                 ),
-                              );
-                            },
-                          ),
                         ],
                       ),
                     );

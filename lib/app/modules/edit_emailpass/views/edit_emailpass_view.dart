@@ -175,7 +175,7 @@ class EditEmailpassView extends GetView<EditEmailpassController> {
                                     },
                                     validator: controller.passValidator,
                                     obscureText:
-                                        controller.isPasswordHidden.value,
+                                        controller.isPasswordHidden1.value,
                                     controller: controller.currentpassC,
                                     decoration: InputDecoration(
                                         prefixIcon: Align(
@@ -227,14 +227,14 @@ class EditEmailpassView extends GetView<EditEmailpassController> {
                                             color: Colors.black26,
                                             splashRadius: 1,
                                             icon: Icon(controller
-                                                    .isPasswordHidden.value
+                                                    .isPasswordHidden1.value
                                                 ? Icons.visibility_rounded
                                                 : Icons.visibility_off_rounded),
                                             onPressed: () {
                                               controller
-                                                      .isPasswordHidden.value =
+                                                      .isPasswordHidden1.value =
                                                   !controller
-                                                      .isPasswordHidden.value;
+                                                      .isPasswordHidden1.value;
                                             },
                                           ),
                                         ),

@@ -31,7 +31,7 @@ class DashboardAdminController extends GetxController {
   Stream<QuerySnapshot<Map<String, dynamic>>> orderProses() {
     return firestore
         .collection("Order")
-        .where('status', isEqualTo: 'Diterima')
+        .where('status', isEqualTo: 'Sedang Diproses Admin')
         .snapshots();
   }
 

@@ -188,8 +188,8 @@ class BarangAdminController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-    searchQuery.close();
-    searchController.dispose();
+    // searchQuery.close();
+    // searchController.dispose();
   }
 
   void increment() => count.value++;
