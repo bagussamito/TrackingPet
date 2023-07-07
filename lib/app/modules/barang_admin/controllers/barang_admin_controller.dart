@@ -19,6 +19,8 @@ class BarangAdminController extends GetxController {
   final namabarangKey = GlobalKey<FormState>().obs;
   final hargabarangC = TextEditingController();
   final hargabarangKey = GlobalKey<FormState>().obs;
+  final stokbarangC = TextEditingController();
+  final stokbarangKey = GlobalKey<FormState>().obs;
   final namabarangBaruC = TextEditingController();
   final namabarangBaruKey = GlobalKey<FormState>().obs;
   final hargabarangBaruC = TextEditingController();
@@ -56,7 +58,8 @@ class BarangAdminController extends GetxController {
     });
   }
 
-  void addBarang(String namabarang, String hargabarang) async {
+  void addBarang(
+      String namabarang, String hargabarang, String stokbarang) async {
     CollectionReference barang = firestore.collection('Barang');
     String uriImage = '';
 
@@ -76,6 +79,7 @@ class BarangAdminController extends GetxController {
         // Menggunakan metode `add` untuk membuat document dengan ID otomatis
         "nama_barang": namabarang,
         "harga_barang": hargabarang,
+        "stok_barang": stokbarang,
         "foto_barang": uriImage,
       });
       await docRef.update({"id": docRef.id});
@@ -100,13 +104,15 @@ class BarangAdminController extends GetxController {
     }
   }
 
-  void editBarang(String id, String namabarang, String hargabarang) async {
+  void editBarang(String id, String namabarang, String hargabarang,
+      String stokbarang) async {
     CollectionReference barang = firestore.collection('Barang');
     DocumentReference docRef = barang.doc(id);
     try {
       await docRef.update({
         "nama_barang": namabarang,
         "harga_barang": hargabarang,
+        "stok_barang": stokbarang,
       });
 
       Get.defaultDialog(
@@ -115,6 +121,7 @@ class BarangAdminController extends GetxController {
         onConfirm: () {
           namabarangC.clear();
           hargabarangC.clear();
+          stokbarangC.clear();
           Get.back();
           Get.back();
         },
