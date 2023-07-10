@@ -556,13 +556,32 @@ class BarangAdminView extends GetView<BarangAdminController> {
                                                   ),
                                                 ),
                                               ),
-                                              Text(
-                                                "${barangData["nama_barang"]}",
-                                                textAlign: TextAlign.start,
-                                                textScaleFactor: 1,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w400,
-                                                    color: Purple),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    "${barangData["nama_barang"]}",
+                                                    textAlign: TextAlign.start,
+                                                    textScaleFactor: 1,
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: Purple),
+                                                  ),
+                                                  SizedBox(
+                                                    width: bodyWidth * 0.02,
+                                                  ),
+                                                  Text(
+                                                    "${barangData["stok_barang"]}",
+                                                    textAlign: TextAlign.start,
+                                                    textScaleFactor: 1,
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: Purple),
+                                                  ),
+                                                ],
                                               ),
                                               Row(
                                                 mainAxisAlignment:
@@ -835,7 +854,7 @@ class BarangAdminView extends GetView<BarangAdminController> {
                                                                             Icons.add),
                                                                         onPressed:
                                                                             () {
-                                                                         if (int.tryParse(stokBarang.value) !=
+                                                                          if (int.tryParse(stokBarang.value) !=
                                                                               null) {
                                                                             int stok =
                                                                                 int.parse(stokBarang.value);

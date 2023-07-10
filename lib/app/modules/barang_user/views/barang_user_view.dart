@@ -161,15 +161,37 @@ class BarangUserView extends GetView<BarangUserController> {
                                                       ),
                                                     ),
                                                   ),
-                                                  Text(
-                                                    data['nama_barang'],
-                                                    textAlign: TextAlign.start,
-                                                    textScaleFactor: 1,
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      color: Purple,
-                                                    ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                        data['nama_barang'],
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        textScaleFactor: 1,
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Purple,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: bodyWidth * 0.02,
+                                                      ),
+                                                      Text(
+                                                        data['stok_barang'],
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        textScaleFactor: 1,
+                                                        style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          color: Purple,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                   SizedBox(
                                                     height: bodyHeight * 0.007,
